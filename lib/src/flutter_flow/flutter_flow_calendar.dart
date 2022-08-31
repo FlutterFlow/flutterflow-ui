@@ -189,6 +189,9 @@ class _FlutterFlowCalendarState extends State<FlutterFlowCalendar> {
                 }
               }
             },
+            onPageChanged: (newFocusedDay) {
+              setState(() => focusedDay = newFocusedDay);
+            },
           ),
         ],
       );
