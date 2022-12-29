@@ -12,11 +12,13 @@ class FlutterFlowWebView extends StatefulWidget {
     this.bypass = false,
     this.horizontalScroll = false,
     this.verticalScroll = false,
+    this.ignoreAllGestures = false,
   }) : super(key: key);
 
   final bool bypass;
   final bool horizontalScroll;
   final bool verticalScroll;
+  final bool ignoreAllGestures;
   final double? height;
   final double? width;
   final String url;
@@ -31,7 +33,7 @@ class _FlutterFlowWebViewState extends State<FlutterFlowWebView> {
         key: webviewKey,
         width: widget.width ?? MediaQuery.of(context).size.width,
         height: widget.height ?? MediaQuery.of(context).size.height,
-        ignoreAllGestures: false,
+        ignoreAllGestures: widget.ignoreAllGestures,
         initialContent: widget.url,
         initialMediaPlaybackPolicy:
             AutoMediaPlaybackPolicy.requireUserActionForAllMediaTypes,
