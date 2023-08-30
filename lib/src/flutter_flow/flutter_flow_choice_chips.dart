@@ -5,8 +5,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 const double _kChoiceChipsHeight = 40.0;
 
 class ChipData {
-  const ChipData(this.label, [this.iconData]);
+  const ChipData(this.label, [this.value = "", this.iconData]);
   final String label;
+  final String value;
   final IconData? iconData;
 }
 
@@ -77,7 +78,8 @@ class _FlutterFlowChoiceChipsState extends State<FlutterFlowChoiceChips> {
         children: [
           ...widget.options.map(
             (option) {
-              final selected = choiceChipValues.contains(option.label);
+              final String value = option.value.isNotEmpty ? option.value : option.label;
+              final selected = choiceChipValues.contains(value);
               final style = selected
                   ? widget.selectedChipStyle
                   : widget.unselectedChipStyle;
@@ -88,13 +90,13 @@ class _FlutterFlowChoiceChipsState extends State<FlutterFlowChoiceChips> {
                   onSelected: (isSelected) {
                     if (isSelected) {
                       widget.multiselect
-                          ? choiceChipValues.add(option.label)
-                          : choiceChipValues = [option.label];
+                          ? choiceChipValues.add(value)
+                          : choiceChipValues = [value];
                       widget.onChanged(choiceChipValues);
                       setState(() {});
                     } else {
                       if (widget.multiselect) {
-                        choiceChipValues.remove(option.label);
+                        choiceChipValues.remove(value);
                         widget.onChanged(choiceChipValues);
                         setState(() {});
                       }
