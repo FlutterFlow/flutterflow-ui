@@ -22,62 +22,59 @@ repository: https://github.com/FlutterFlow/flutterflow-ui
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.1.0+4
+version: 0.2.0
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  
   auto_size_text: 3.0.0
-  cached_network_image: 3.1.0+1
-  chewie: 1.2.2
-  collection: 1.15.0
+  cached_network_image: 3.2.1
+  carousel_slider: 4.2.1
+  chewie: 1.4.0
   emoji_flag_converter: 1.1.0
-  fl_chart: 0.50.6
-  flutter_credit_card: 2.0.0
-  flutter_google_places: 0.3.0
+  equatable: 2.0.5
+  flutter_animate: 4.1.1+1
+  flutter_cache_manager: 3.3.0
+  flutter_credit_card: 3.0.6
+  flutter_plugin_android_lifecycle: 2.0.9
+  flutter_staggered_grid_view: 0.6.2
   font_awesome_flutter: 10.1.0
-  google_api_headers:
-  google_fonts: 2.2.0
-  google_maps_flutter: 2.1.1
-  google_maps_webservice:
-  internet_file: 1.0.0+2
-  intl: 0.17.0
-  json_path: 0.3.1
-  json_serializable: 6.1.3
-  mapbox_search: 3.0.1+2
+  fl_chart: 0.55.0
+  from_css_color: 2.0.0
+  go_router: 7.1.1
+  google_fonts: 4.0.3
+  intl: 0.18.1
+  json_path:
   mime_type: 1.0.0
   page_transition: 2.0.4
-  pdfx: 2.0.1+2
-  rive: 0.7.33
-  rxdart: 0.26.0
-  shared_preferences: 2.0.11
-  table_calendar: 3.0.5
-  timeago: 3.1.0
-  url_launcher: 6.0.15
-  video_player: 2.2.7
-  webviewx: 0.2.1
-  youtube_plyr_iframe: 2.0.7
-  
-  # For assets_audio_player
-  uuid: ^3.0.5
-  http: ^0.13.4 # to download / cache network files
-  path_provider: ^2.0.8 # removed this because it cancel flutter/android/ios on pub.dev path_provider: ^1.6.10
+  percent_indicator: 4.2.2
+  rive: 0.10.3
+  rive_common: 0.0.6
+  provider: 6.0.4
+  smooth_page_indicator: 1.0.1
+  sqflite: 2.2.6
+  swipeable_card_stack: 0.0.5
+  timeago: 3.2.2
+  table_calendar: 3.0.9
 
-  # For flutter_html
-  html: '>=0.15.0 <1.0.0'
-  csslib: '>=0.17.0 <1.0.0'
-  flutter_layout_grid: '>=1.0.1 <2.0.0'
-  webview_flutter: '>=2.0.4 <3.0.0'
-  chewie_audio: '>=1.2.0 <2.0.0'
-  flutter_svg: '>=0.22.0 <1.0.0'
-  numerus: '>=1.1.1 <2.0.0'
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.0
 
 dev_dependencies:
   dependency_validator:
+
+dependency_overrides:
+  archive: 3.3.0
+  flutter_inappwebview: ^6.0.0-beta.24+1
+  http: 0.13.6
+  rxdart: ^0.27.0
+  win32: ^3.1.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

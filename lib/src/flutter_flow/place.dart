@@ -36,11 +36,11 @@ class FFPlace {
   @override
   bool operator ==(other) =>
       other is FFPlace &&
-      latLng == other.latLng &&
-      name == name &&
-      address == address &&
-      city == city &&
-      state == state &&
-      country == country &&
-      zipCode == zipCode;
+          latLng == other.latLng &&
+          name == other.name &&
+          address == other.address &&
+          city == other.city &&
+          state == other.state &&
+          country == other.country &&
+          zipCode == other.zipCode;
 }
