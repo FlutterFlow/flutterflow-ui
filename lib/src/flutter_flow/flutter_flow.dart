@@ -2,7 +2,6 @@ library flutterflow_ui;
 
 export 'flutter_flow_animations.dart';
 export 'flutter_flow_icon_button.dart';
-export 'flutter_flow_video_player.dart';
 export 'flutter_flow_language_selector.dart';
 export 'flutter_flow_media_display.dart';
 export 'flutter_flow_widgets.dart';
