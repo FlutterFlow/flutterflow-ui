@@ -1,6 +1,6 @@
 # flutterflow_ui
 
-`flutterflow_ui` simplifies the process of adding FlutterFlow-generated UI code to your Flutter projects. It streamlines integration, saving you time and effort in your Flutter app UI development.
+`flutterflow_ui` simplifies the process of adding FlutterFlow-generated UI code to your Flutter projects. It streamlines integration, saving you time and effort in the UI development for your Flutter app.
 
 ## Generate code in your FlutterFlow project
 
