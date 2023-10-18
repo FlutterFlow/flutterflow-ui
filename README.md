@@ -61,7 +61,7 @@ __________________________________________
 
 * Begin by right-clicking on the component or widget within your FlutterFlow canvas. Then, select "Copy Widget Code."
 
-<img src="https://github.com/FlutterFlow/flutterflow-ui/blob/main/assets/right_click.png" width="500" />
+<img src="https://github.com/FlutterFlow/flutterflow-ui/blob/main/assets/right-click.png" width="300" />
 
 Alternatively, you can follow similar steps as mentioned above, but click on "View Code" from the Developer Menu. After that, click on the widget in the preview that you want to copy. The code will be displayed on the left-hand side.
 
