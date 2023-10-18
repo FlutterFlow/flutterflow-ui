@@ -25,15 +25,17 @@
  * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import 'form_field_controller.dart';
 import 'package:flutter/material.dart';
 
 class FlutterFlowRadioButton extends StatefulWidget {
   const FlutterFlowRadioButton({
     required this.options,
     required this.onChanged,
-    this.initialValue = '',
+    required this.controller,
     required this.optionHeight,
     required this.textStyle,
+    this.optionWidth,
     this.selectedTextStyle,
     this.textPadding = EdgeInsets.zero,
     this.buttonPosition = RadioButtonPosition.left,
@@ -46,9 +48,10 @@ class FlutterFlowRadioButton extends StatefulWidget {
   });
 
   final List<String> options;
-  final Function(String?) onChanged;
-  final String initialValue;
+  final Function(String?)? onChanged;
+  final FormFieldController<String> controller;
   final double optionHeight;
+  final double? optionWidth;
   final TextStyle textStyle;
   final TextStyle? selectedTextStyle;
   final EdgeInsetsGeometry textPadding;
@@ -65,15 +68,28 @@ class FlutterFlowRadioButton extends StatefulWidget {
 }
 
 class _FlutterFlowRadioButtonState extends State<FlutterFlowRadioButton> {
-  late String? groupValue;
-  List<String> get effectiveOptions =>
-      widget.options.isEmpty ? ['[Option]'] : widget.options;
+  void Function()? get listener => widget.onChanged != null
+      ? () => widget.onChanged!(widget.controller.value)
+      : null;
 
   @override
   void initState() {
-    groupValue = widget.initialValue;
+    if (listener != null) {
+      widget.controller.addListener(listener!);
+    }
     super.initState();
   }
+
+  @override
+  void dispose() {
+    if (listener != null) {
+      widget.controller.removeListener(listener!);
+    }
+    super.dispose();
+  }
+
+  List<String> get effectiveOptions =>
+      widget.options.isEmpty ? ['[Option]'] : widget.options;
 
   @override
   Widget build(BuildContext context) {
@@ -82,19 +98,15 @@ class _FlutterFlowRadioButtonState extends State<FlutterFlowRadioButton> {
           .copyWith(unselectedWidgetColor: widget.inactiveRadioButtonColor),
       child: RadioGroup<String>.builder(
         direction: widget.direction,
-        groupValue: groupValue,
-        onChanged: (value) {
-          widget.onChanged(value);
-          setState(() {
-            groupValue = value;
-          });
-        },
+        groupValue: widget.controller.value,
+        onChanged: (value) => widget.controller.value = value,
         activeColor: widget.radioButtonColor,
         toggleable: widget.toggleable,
         textStyle: widget.textStyle,
         selectedTextStyle: widget.selectedTextStyle ?? widget.textStyle,
         textPadding: widget.textPadding,
         optionHeight: widget.optionHeight,
+        optionWidth: widget.optionWidth,
         horizontalAlignment: widget.horizontalAlignment,
         verticalAlignment: widget.verticalAlignment,
         items: effectiveOptions,
@@ -112,9 +124,9 @@ enum RadioButtonPosition {
 
 class RadioButtonBuilder<T> {
   RadioButtonBuilder(
-    this.description, {
-    this.buttonPosition = RadioButtonPosition.left,
-  });
+      this.description, {
+        this.buttonPosition = RadioButtonPosition.left,
+      });
 
   final String description;
   final RadioButtonPosition buttonPosition;
@@ -132,6 +144,7 @@ class RadioButton<T> extends StatelessWidget {
     required this.textStyle,
     required this.selectedTextStyle,
     required this.textPadding,
+    this.shouldFlex = false,
   });
 
   final String description;
@@ -144,18 +157,22 @@ class RadioButton<T> extends StatelessWidget {
   final TextStyle textStyle;
   final TextStyle selectedTextStyle;
   final EdgeInsetsGeometry textPadding;
+  final bool shouldFlex;
 
   @override
   Widget build(BuildContext context) {
     final selectedStyle = selectedTextStyle;
     final isSelected = value == groupValue;
-    final radioButtonText = Padding(
+    Widget radioButtonText = Padding(
       padding: textPadding,
       child: Text(
         description,
         style: isSelected ? selectedStyle : textStyle,
       ),
     );
+    if (shouldFlex) {
+      radioButtonText = Flexible(child: radioButtonText);
+    }
     return InkWell(
       onTap: () => onChanged!(value),
       child: Row(
@@ -190,6 +207,7 @@ class RadioGroup<T> extends StatelessWidget {
     required this.textStyle,
     required this.selectedTextStyle,
     required this.textPadding,
+    this.optionWidth,
     this.verticalAlignment = WrapCrossAlignment.center,
   });
 
@@ -199,6 +217,7 @@ class RadioGroup<T> extends StatelessWidget {
   final void Function(T?)? onChanged;
   final Axis direction;
   final double optionHeight;
+  final double? optionWidth;
   final WrapAlignment horizontalAlignment;
   final WrapCrossAlignment verticalAlignment;
   final Color activeColor;
@@ -209,35 +228,37 @@ class RadioGroup<T> extends StatelessWidget {
 
   List<Widget> get _group => items.map(
         (item) {
-          final radioButtonBuilder = itemBuilder(item);
-          return Container(
-            height: optionHeight,
-            child: RadioButton(
-              description: radioButtonBuilder.description,
-              value: item,
-              groupValue: groupValue,
-              onChanged: onChanged,
-              buttonPosition: radioButtonBuilder.buttonPosition,
-              activeColor: activeColor,
-              toggleable: toggleable,
-              textStyle: textStyle,
-              selectedTextStyle: selectedTextStyle,
-              textPadding: textPadding,
-            ),
-          );
-        },
-      ).toList();
+      final radioButtonBuilder = itemBuilder(item);
+      return Container(
+        height: optionHeight,
+        width: optionWidth,
+        child: RadioButton(
+          description: radioButtonBuilder.description,
+          value: item,
+          groupValue: groupValue,
+          onChanged: onChanged,
+          buttonPosition: radioButtonBuilder.buttonPosition,
+          activeColor: activeColor,
+          toggleable: toggleable,
+          textStyle: textStyle,
+          selectedTextStyle: selectedTextStyle,
+          textPadding: textPadding,
+          shouldFlex: optionWidth != null,
+        ),
+      );
+    },
+  ).toList();
 
   @override
   Widget build(BuildContext context) => direction == Axis.horizontal
       ? Wrap(
-          direction: direction,
-          alignment: horizontalAlignment,
-          children: _group,
-        )
+    direction: direction,
+    alignment: horizontalAlignment,
+    children: _group,
+  )
       : Wrap(
-          direction: direction,
-          crossAxisAlignment: verticalAlignment,
-          children: _group,
-        );
+    direction: direction,
+    crossAxisAlignment: verticalAlignment,
+    children: _group,
+  );
 }
