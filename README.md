@@ -5,11 +5,13 @@
 ## Generate code in your FlutterFlow project
 
 Go to your FlutterFlow project and click on the code icon and click on `View Code`
-![](https://github.com/flutterflow/flutterflow-ui/assets/package1.gif)
+
+<img src="https://github.com/FlutterFlow/flutterflow-ui/blob/pooja/new_widgets/assets/package1.gif" width="500" />
 
 You will be able to see the FlutterFlow generated code for your pages and components. Choose your desired page or component and copy the widget code and paste it in a new Flutter file in your Flutter project. 
 
 Make sure to also add the generated model code in the same file or in a separate file as per your directory architecture. In some cases, it might be an empty file and you may be able to remove it later.
+
 On pasting the code, you might see some errors that will be resolved after the following steps.
 
 ## Add Dependency
