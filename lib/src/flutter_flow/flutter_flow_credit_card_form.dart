@@ -37,11 +37,11 @@ class FlutterFlowCreditCardForm extends StatefulWidget {
 
 class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
   final MaskedTextController _cardNumberController =
-  MaskedTextController(mask: '0000 0000 0000 0000');
+      MaskedTextController(mask: '0000 0000 0000 0000');
   final TextEditingController _expiryDateController =
-  MaskedTextController(mask: '00/00');
+      MaskedTextController(mask: '00/00');
   final TextEditingController _cvvCodeController =
-  MaskedTextController(mask: '0000');
+      MaskedTextController(mask: '0000');
 
   FocusNode cvvFocusNode = FocusNode();
   FocusNode cardNumberNode = FocusNode();
@@ -67,11 +67,11 @@ class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
     }
     cvvFocusNode.addListener(textFieldFocusDidChange);
     _cardNumberController.addListener(() => setState(
-            () => widget.creditCardModel.cardNumber = _cardNumberController.text));
+        () => widget.creditCardModel.cardNumber = _cardNumberController.text));
     _expiryDateController.addListener(() => setState(
-            () => widget.creditCardModel.expiryDate = _expiryDateController.text));
+        () => widget.creditCardModel.expiryDate = _expiryDateController.text));
     _cvvCodeController.addListener(() => setState(
-            () => widget.creditCardModel.cvvCode = _cvvCodeController.text));
+        () => widget.creditCardModel.cvvCode = _cvvCodeController.text));
   }
 
   @override
@@ -83,116 +83,116 @@ class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
 
   @override
   Widget build(BuildContext context) => Form(
-    key: widget.formKey,
-    child: Column(
-      children: <Widget>[
-        Container(
-          margin: const EdgeInsets.only(top: 12.0),
-          child: TextFormField(
-            obscureText: widget.obscureNumber,
-            controller: _cardNumberController,
-            onEditingComplete: () =>
-                FocusScope.of(context).requestFocus(expiryDateNode),
-            style: widget.textStyle,
-            decoration: widget.inputDecoration.copyWith(
-              labelText: 'Card number',
-              hintText: 'XXXX XXXX XXXX XXXX',
-              labelStyle: widget.textStyle,
-              hintStyle: widget.textStyle,
-            ),
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.next,
-            validator: (value) {
-              // Validate less that 13 digits +3 white spaces
-              if (value == null || value.isEmpty || value.length < 16) {
-                return 'Please input a valid number';
-              }
-              return null;
-            },
-          ),
-        ),
-        SizedBox(height: widget.spacing),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        key: widget.formKey,
+        child: Column(
           children: <Widget>[
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                child: TextFormField(
-                  controller: _expiryDateController,
-                  focusNode: expiryDateNode,
-                  onEditingComplete: () {
-                    FocusScope.of(context).requestFocus(cvvFocusNode);
-                  },
-                  style: widget.textStyle,
-                  decoration: widget.inputDecoration.copyWith(
-                    labelText: 'Exp. Date',
-                    hintText: 'MM/YY',
-                    labelStyle: widget.textStyle,
-                    hintStyle: widget.textStyle,
-                  ),
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please input a valid date';
-                    }
-
-                    final DateTime now = DateTime.now();
-                    final List<String> date = value.split(RegExp(r'/'));
-                    final int month = int.parse(date.first);
-                    final int year = int.parse('20${date.last}');
-                    final DateTime cardDate = DateTime(year, month);
-
-                    if (cardDate.isBefore(now) ||
-                        month > 12 ||
-                        month == 0) {
-                      return 'Please input a valid date';
-                    }
-                    return null;
-                  },
+            Container(
+              margin: const EdgeInsets.only(top: 12.0),
+              child: TextFormField(
+                obscureText: widget.obscureNumber,
+                controller: _cardNumberController,
+                onEditingComplete: () =>
+                    FocusScope.of(context).requestFocus(expiryDateNode),
+                style: widget.textStyle,
+                decoration: widget.inputDecoration.copyWith(
+                  labelText: 'Card number',
+                  hintText: 'XXXX XXXX XXXX XXXX',
+                  labelStyle: widget.textStyle,
+                  hintStyle: widget.textStyle,
                 ),
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
+                validator: (value) {
+                  // Validate less that 13 digits +3 white spaces
+                  if (value == null || value.isEmpty || value.length < 16) {
+                    return 'Please input a valid number';
+                  }
+                  return null;
+                },
               ),
             ),
-            const SizedBox(width: 16.0),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                child: TextFormField(
-                  obscureText: widget.obscureCvv,
-                  focusNode: cvvFocusNode,
-                  controller: _cvvCodeController,
-                  style: widget.textStyle,
-                  decoration: widget.inputDecoration.copyWith(
-                    labelText: 'CVV',
-                    hintText: 'XXX',
-                    labelStyle: widget.textStyle,
-                    hintStyle: widget.textStyle,
+            SizedBox(height: widget.spacing),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                    child: TextFormField(
+                      controller: _expiryDateController,
+                      focusNode: expiryDateNode,
+                      onEditingComplete: () {
+                        FocusScope.of(context).requestFocus(cvvFocusNode);
+                      },
+                      style: widget.textStyle,
+                      decoration: widget.inputDecoration.copyWith(
+                        labelText: 'Exp. Date',
+                        hintText: 'MM/YY',
+                        labelStyle: widget.textStyle,
+                        hintStyle: widget.textStyle,
+                      ),
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please input a valid date';
+                        }
+
+                        final DateTime now = DateTime.now();
+                        final List<String> date = value.split(RegExp(r'/'));
+                        final int month = int.parse(date.first);
+                        final int year = int.parse('20${date.last}');
+                        final DateTime cardDate = DateTime(year, month);
+
+                        if (cardDate.isBefore(now) ||
+                            month > 12 ||
+                            month == 0) {
+                          return 'Please input a valid date';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        value.length < 3) {
-                      return 'Please input a valid CVV';
-                    }
-                    return null;
-                  },
                 ),
-              ),
+                const SizedBox(width: 16.0),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                    child: TextFormField(
+                      obscureText: widget.obscureCvv,
+                      focusNode: cvvFocusNode,
+                      controller: _cvvCodeController,
+                      style: widget.textStyle,
+                      decoration: widget.inputDecoration.copyWith(
+                        labelText: 'CVV',
+                        hintText: 'XXX',
+                        labelStyle: widget.textStyle,
+                        hintStyle: widget.textStyle,
+                      ),
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            value.length < 3) {
+                          return 'Please input a valid CVV';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
-      ],
-    ),
-  );
+      );
 
   /// Credit Card prefix patterns as of March 2019
   /// A [List<String>] represents a range.
   /// i.e. ['51', '55'] represents the range of cards starting with '51' to those starting with '55'
   Map<CardType, Set<List<String>>> cardNumPatterns =
-  <CardType, Set<List<String>>>{
+      <CardType, Set<List<String>>>{
     CardType.visa: <List<String>>{
       <String>['4'],
     },
@@ -227,7 +227,7 @@ class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
     }
 
     cardNumPatterns.forEach(
-          (type, patterns) {
+      (type, patterns) {
         for (final patternRange in patterns) {
           // Remove any spaces
           String ccPatternStr = cardNumber.replaceAll(RegExp(r's+|s'), '');

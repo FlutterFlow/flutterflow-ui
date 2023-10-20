@@ -76,7 +76,7 @@ class _FlutterFlowCalendarState extends State<FlutterFlowCalendar> {
       start: selectedDay.startOfDay,
       end: selectedDay.endOfDay,
     );
-    SchedulerBinding.instance!
+    SchedulerBinding.instance
         .addPostFrameCallback((_) => setSelectedDay(selectedRange.start));
   }
 

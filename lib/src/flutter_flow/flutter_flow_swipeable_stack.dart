@@ -58,36 +58,36 @@ List<Widget> getItems(int itemCount, BuildContext context,
 class _FFSwipeableStackState extends State<FlutterFlowSwipeableStack> {
   @override
   Widget build(BuildContext context) => Column(
-    children: [
-      SwipeableCardsSection(
-        cardController: widget.controller,
-        context: context,
-        cardWidthTopMul: widget.topCardWidthFraction,
-        cardHeightTopMul: widget.topCardHeightFraction,
-        cardWidthBottomMul: widget.bottomCardWidthFraction,
-        cardHeightBottomMul: widget.bottomCardHeightFraction,
-        cardWidthMiddleMul: widget.middleCardWidthFraction,
-        cardHeightMiddleMul: widget.middleCardHeightFraction,
-        items: getItems(widget.itemCount, context, widget.itemBuilder),
-        onCardSwiped: (dir, int index, _) {
-          if (index + 3 < widget.itemCount) {
-            widget.controller
-                .addItem(widget.itemBuilder(context, index + 3));
-          }
-          widget.onSwipeFn(index);
-          if (dir == Direction.left) {
-            widget.onLeftSwipe(index);
-          } else if (dir == Direction.right) {
-            widget.onRightSwipe(index);
-          } else if (dir == Direction.up) {
-            widget.onUpSwipe(index);
-          } else if (dir == Direction.down) {
-            widget.onDownSwipe(index);
-          }
-        },
-        enableSwipeUp: widget.enableSwipeUp,
-        enableSwipeDown: widget.enableSwipeDown,
-      ),
-    ],
-  );
+        children: [
+          SwipeableCardsSection(
+            cardController: widget.controller,
+            context: context,
+            cardWidthTopMul: widget.topCardWidthFraction,
+            cardHeightTopMul: widget.topCardHeightFraction,
+            cardWidthBottomMul: widget.bottomCardWidthFraction,
+            cardHeightBottomMul: widget.bottomCardHeightFraction,
+            cardWidthMiddleMul: widget.middleCardWidthFraction,
+            cardHeightMiddleMul: widget.middleCardHeightFraction,
+            items: getItems(widget.itemCount, context, widget.itemBuilder),
+            onCardSwiped: (dir, int index, _) {
+              if (index + 3 < widget.itemCount) {
+                widget.controller
+                    .addItem(widget.itemBuilder(context, index + 3));
+              }
+              widget.onSwipeFn(index);
+              if (dir == Direction.left) {
+                widget.onLeftSwipe(index);
+              } else if (dir == Direction.right) {
+                widget.onRightSwipe(index);
+              } else if (dir == Direction.up) {
+                widget.onUpSwipe(index);
+              } else if (dir == Direction.down) {
+                widget.onDownSwipe(index);
+              }
+            },
+            enableSwipeUp: widget.enableSwipeUp,
+            enableSwipeDown: widget.enableSwipeDown,
+          ),
+        ],
+      );
 }

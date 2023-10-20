@@ -74,7 +74,7 @@ class _FlutterFlowChoiceChipsState extends State<FlutterFlowChoiceChips> {
     choiceChipValues = List.from(widget.controller.initialValue ?? []);
     if (!widget.initialized && choiceChipValues.isNotEmpty) {
       SchedulerBinding.instance.addPostFrameCallback(
-            (_) {
+        (_) {
           if (widget.onChanged != null) {
             widget.onChanged!(choiceChipValues);
           }
@@ -99,66 +99,66 @@ class _FlutterFlowChoiceChipsState extends State<FlutterFlowChoiceChips> {
 
   @override
   Widget build(BuildContext context) => Wrap(
-    spacing: widget.chipSpacing,
-    runSpacing: widget.rowSpacing,
-    alignment: widget.alignment,
-    crossAxisAlignment: WrapCrossAlignment.center,
-    children: [
-      ...widget.options.map(
+        spacing: widget.chipSpacing,
+        runSpacing: widget.rowSpacing,
+        alignment: widget.alignment,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          ...widget.options.map(
             (option) {
-          final selected = choiceChipValues.contains(option.label);
-          final style = selected
-              ? widget.selectedChipStyle
-              : widget.unselectedChipStyle;
-          return ChoiceChip(
-            selected: selected,
-            onSelected: widget.onChanged != null
-                ? (isSelected) {
-              if (isSelected) {
-                widget.multiselect
-                    ? choiceChipValues.add(option.label)
-                    : choiceChipValues = [option.label];
-                widget.controller.value = List.from(choiceChipValues);
-                setState(() {});
-              } else {
-                if (widget.multiselect) {
-                  choiceChipValues.remove(option.label);
-                  widget.controller.value =
-                      List.from(choiceChipValues);
-                  setState(() {});
-                }
-              }
-            }
-                : null,
-            label: Text(
-              option.label,
-              style: style.textStyle,
-            ),
-            labelPadding: style.labelPadding,
-            avatar: option.iconData != null
-                ? FaIcon(
-              option.iconData,
-              size: style.iconSize,
-              color: style.iconColor,
-            )
-                : null,
-            elevation: style.elevation,
-            selectedColor:
-            selected ? widget.selectedChipStyle.backgroundColor : null,
-            backgroundColor: selected
-                ? null
-                : widget.unselectedChipStyle.backgroundColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: style.borderRadius ?? BorderRadius.circular(16),
-              side: BorderSide(
-                color: style.borderColor ?? Colors.transparent,
-                width: style.borderWidth ?? 0,
-              ),
-            ),
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          );
-        },
-      ).toList(),
-    ],
-  );
+              final selected = choiceChipValues.contains(option.label);
+              final style = selected
+                  ? widget.selectedChipStyle
+                  : widget.unselectedChipStyle;
+              return ChoiceChip(
+                selected: selected,
+                onSelected: widget.onChanged != null
+                    ? (isSelected) {
+                        if (isSelected) {
+                          widget.multiselect
+                              ? choiceChipValues.add(option.label)
+                              : choiceChipValues = [option.label];
+                          widget.controller.value = List.from(choiceChipValues);
+                          setState(() {});
+                        } else {
+                          if (widget.multiselect) {
+                            choiceChipValues.remove(option.label);
+                            widget.controller.value =
+                                List.from(choiceChipValues);
+                            setState(() {});
+                          }
+                        }
+                      }
+                    : null,
+                label: Text(
+                  option.label,
+                  style: style.textStyle,
+                ),
+                labelPadding: style.labelPadding,
+                avatar: option.iconData != null
+                    ? FaIcon(
+                        option.iconData,
+                        size: style.iconSize,
+                        color: style.iconColor,
+                      )
+                    : null,
+                elevation: style.elevation,
+                selectedColor:
+                    selected ? widget.selectedChipStyle.backgroundColor : null,
+                backgroundColor: selected
+                    ? null
+                    : widget.unselectedChipStyle.backgroundColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: style.borderRadius ?? BorderRadius.circular(16),
+                  side: BorderSide(
+                    color: style.borderColor ?? Colors.transparent,
+                    width: style.borderWidth ?? 0,
+                  ),
+                ),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              );
+            },
+          ).toList(),
+        ],
+      );
 }

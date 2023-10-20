@@ -13,12 +13,12 @@ double randomDouble(double min, double max) {
 }
 
 String randomString(
-    int minLength,
-    int maxLength,
-    bool lowercaseAz,
-    bool uppercaseAz,
-    bool digits,
-    ) {
+  int minLength,
+  int maxLength,
+  bool lowercaseAz,
+  bool uppercaseAz,
+  bool digits,
+) {
   var chars = '';
   if (lowercaseAz) {
     chars += 'abcdefghijklmnopqrstuvwxyz';
@@ -30,7 +30,7 @@ String randomString(
     chars += '0123456789';
   }
   return List.generate(randomInteger(minLength, maxLength),
-          (index) => chars[_random.nextInt(chars.length)]).join();
+      (index) => chars[_random.nextInt(chars.length)]).join();
 }
 
 // Random date between 1970 and 2025.

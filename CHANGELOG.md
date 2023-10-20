@@ -1,13 +1,16 @@
-# 0.1.0+4
+## 0.2.0
 
-Initial beta release
+**Breaking changes**
+ - Remove Flutter media plugins such as chewie, video_player, audio_player, google_maps, webview, mapbox, rxdart, shared_preferences
 
-# 0.1.1
+**Features**
+ - Add support for new UI widgets available in current FlutterFlow release
+ - Add generated code for animations support
+
+## 0.1.1
 
 Removed FlutterFlowTheme from package
 
-# 0.2.0
+## 0.1.0+4
 
-Add generated code for animations support
-Add support for new UI widgets available in current FlutterFlow release
-Remove Flutter media plugins such as chewie, video_player, audio_player, google_maps, webview, mapbox, rxdart, shared_preferences
+Initial beta release

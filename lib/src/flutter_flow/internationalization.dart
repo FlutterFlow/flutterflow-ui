@@ -8,15 +8,19 @@ class FFLocalizations {
   final Locale locale;
 
   //Initializing
-  static FFLocalizations of(BuildContext context) => FFLocalizations(Locale('en'));
+  static FFLocalizations of(BuildContext context) =>
+      FFLocalizations(Locale('en'));
 
   static List<String> languages() => ['en'];
 
   String get languageCode => locale.languageCode;
 
-  int get languageIndex => languages().contains(languageCode) ? languages().indexOf(languageCode) : 0;
+  int get languageIndex => languages().contains(languageCode)
+      ? languages().indexOf(languageCode)
+      : 0;
 
-  String getText(String key) => (kTranslationsMap[key] ?? {})[locale.languageCode] ?? '';
+  String getText(String key) =>
+      (kTranslationsMap[key] ?? {})[locale.languageCode] ?? '';
 
   String getVariableText({
     String? enText = '',
@@ -28,13 +32,16 @@ class FFLocalizationsDelegate extends LocalizationsDelegate<FFLocalizations> {
   const FFLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => FFLocalizations.languages().contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      FFLocalizations.languages().contains(locale.languageCode);
 
   @override
-  Future<FFLocalizations> load(Locale locale) => SynchronousFuture<FFLocalizations>(FFLocalizations(locale));
+  Future<FFLocalizations> load(Locale locale) =>
+      SynchronousFuture<FFLocalizations>(FFLocalizations(locale));
 
   @override
   bool shouldReload(FFLocalizationsDelegate old) => false;
 }
 
-final kTranslationsMap = <Map<String, Map<String, String>>>[].reduce((a, b) => a..addAll(b));
+final kTranslationsMap =
+    <Map<String, Map<String, String>>>[].reduce((a, b) => a..addAll(b));

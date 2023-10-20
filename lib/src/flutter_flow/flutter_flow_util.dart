@@ -7,9 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:json_path/json_path.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-
-import 'lat_lng.dart';
-
 export 'lat_lng.dart';
 export 'place.dart';
 export 'flutter_flow_model.dart';
@@ -20,7 +17,6 @@ export 'package:intl/intl.dart';
 export 'package:page_transition/page_transition.dart';
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<PageRoute>();
-
 
 T valueOrDefault<T>(T? value, T defaultValue) =>
     (value is String && value.isEmpty) || value == null ? defaultValue : value;
@@ -58,14 +54,14 @@ enum DecimalType {
 }
 
 String formatNumber(
-    num? value, {
-      required FormatType formatType,
-      DecimalType? decimalType,
-      String? currency,
-      bool toLowerCase = false,
-      String? format,
-      String? locale,
-    }) {
+  num? value, {
+  required FormatType formatType,
+  DecimalType? decimalType,
+  String? currency,
+  bool toLowerCase = false,
+  String? format,
+  String? locale,
+}) {
   if (value == null) {
     return '';
   }
@@ -136,10 +132,10 @@ extension DateTimeComparisonOperators on DateTime {
 }
 
 dynamic getJsonField(
-    dynamic response,
-    String jsonPath, [
-      bool isForList = false,
-    ]) {
+  dynamic response,
+  String jsonPath, [
+  bool isForList = false,
+]) {
   final field = JsonPath(jsonPath).read(response);
   if (field.isEmpty) {
     return null;
@@ -209,11 +205,11 @@ extension IterableExt<T> on Iterable<T> {
 }
 
 void showSnackbar(
-    BuildContext context,
-    String message, {
-      bool loading = false,
-      int duration = 4,
-    }) {
+  BuildContext context,
+  String message, {
+  bool loading = false,
+  int duration = 4,
+}) {
   ScaffoldMessenger.of(context).hideCurrentSnackBar();
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
@@ -255,7 +251,7 @@ extension ListDivideExt<T extends Widget> on Iterable<T> {
   List<Widget> divide(Widget t) => isEmpty
       ? []
       : (enumerate.map((e) => [e.value, t]).expand((i) => i).toList()
-    ..removeLast());
+        ..removeLast());
 
   List<Widget> around(Widget t) => addToStart(t).addToEnd(t);
 

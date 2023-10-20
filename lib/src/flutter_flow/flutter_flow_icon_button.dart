@@ -78,7 +78,7 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
   Widget build(BuildContext context) {
     ButtonStyle style = ButtonStyle(
       shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
-            (states) {
+        (states) {
           return RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius ?? 0),
             side: BorderSide(
@@ -89,7 +89,7 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
         },
       ),
       iconColor: MaterialStateProperty.resolveWith<Color?>(
-            (states) {
+        (states) {
           if (states.contains(MaterialState.disabled) &&
               widget.disabledIconColor != null) {
             return widget.disabledIconColor;
@@ -102,7 +102,7 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
         },
       ),
       backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-            (states) {
+        (states) {
           if (states.contains(MaterialState.disabled) &&
               widget.disabledColor != null) {
             return widget.disabledColor;
@@ -127,30 +127,30 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
           child: IconButton(
             icon: (widget.showLoadingIndicator && loading)
                 ? Container(
-              width: iconSize,
-              height: iconSize,
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  iconColor ?? Colors.white,
-                ),
-              ),
-            )
+                    width: iconSize,
+                    height: iconSize,
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        iconColor ?? Colors.white,
+                      ),
+                    ),
+                  )
                 : effectiveIcon,
             onPressed: widget.onPressed == null
                 ? null
                 : () async {
-              if (loading) {
-                return;
-              }
-              setState(() => loading = true);
-              try {
-                await widget.onPressed!();
-              } finally {
-                if (mounted) {
-                  setState(() => loading = false);
-                }
-              }
-            },
+                    if (loading) {
+                      return;
+                    }
+                    setState(() => loading = true);
+                    try {
+                      await widget.onPressed!();
+                    } finally {
+                      if (mounted) {
+                        setState(() => loading = false);
+                      }
+                    }
+                  },
             splashRadius: widget.buttonSize,
             style: style,
           ),

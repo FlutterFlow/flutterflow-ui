@@ -124,9 +124,9 @@ enum RadioButtonPosition {
 
 class RadioButtonBuilder<T> {
   RadioButtonBuilder(
-      this.description, {
-        this.buttonPosition = RadioButtonPosition.left,
-      });
+    this.description, {
+    this.buttonPosition = RadioButtonPosition.left,
+  });
 
   final String description;
   final RadioButtonPosition buttonPosition;
@@ -228,37 +228,37 @@ class RadioGroup<T> extends StatelessWidget {
 
   List<Widget> get _group => items.map(
         (item) {
-      final radioButtonBuilder = itemBuilder(item);
-      return Container(
-        height: optionHeight,
-        width: optionWidth,
-        child: RadioButton(
-          description: radioButtonBuilder.description,
-          value: item,
-          groupValue: groupValue,
-          onChanged: onChanged,
-          buttonPosition: radioButtonBuilder.buttonPosition,
-          activeColor: activeColor,
-          toggleable: toggleable,
-          textStyle: textStyle,
-          selectedTextStyle: selectedTextStyle,
-          textPadding: textPadding,
-          shouldFlex: optionWidth != null,
-        ),
-      );
-    },
-  ).toList();
+          final radioButtonBuilder = itemBuilder(item);
+          return Container(
+            height: optionHeight,
+            width: optionWidth,
+            child: RadioButton(
+              description: radioButtonBuilder.description,
+              value: item,
+              groupValue: groupValue,
+              onChanged: onChanged,
+              buttonPosition: radioButtonBuilder.buttonPosition,
+              activeColor: activeColor,
+              toggleable: toggleable,
+              textStyle: textStyle,
+              selectedTextStyle: selectedTextStyle,
+              textPadding: textPadding,
+              shouldFlex: optionWidth != null,
+            ),
+          );
+        },
+      ).toList();
 
   @override
   Widget build(BuildContext context) => direction == Axis.horizontal
       ? Wrap(
-    direction: direction,
-    alignment: horizontalAlignment,
-    children: _group,
-  )
+          direction: direction,
+          alignment: horizontalAlignment,
+          children: _group,
+        )
       : Wrap(
-    direction: direction,
-    crossAxisAlignment: verticalAlignment,
-    children: _group,
-  );
+          direction: direction,
+          crossAxisAlignment: verticalAlignment,
+          children: _group,
+        );
 }

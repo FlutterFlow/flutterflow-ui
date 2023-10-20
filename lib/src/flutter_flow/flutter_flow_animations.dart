@@ -43,15 +43,16 @@ extension AnimatedWidgetExtension on Widget {
           : null);
 
   Widget animateOnActionTrigger(
-      AnimationInfo animationInfo, {
-        bool hasBeenTriggered = false,
-      }) =>
+    AnimationInfo animationInfo, {
+    bool hasBeenTriggered = false,
+  }) =>
       hasBeenTriggered || animationInfo.applyInitialState
           ? Animate(
-          controller: animationInfo.controller,
-          autoPlay: false,
-          effects: animationInfo.effects,
-          child: this)
+              controller: animationInfo.controller,
+              autoPlay: false,
+              effects: animationInfo.effects,
+              child: this,
+            )
           : this;
 }
 
@@ -63,20 +64,20 @@ class TiltEffect extends Effect<Offset> {
     Offset? begin,
     Offset? end,
   }) : super(
-    delay: delay,
-    duration: duration,
-    curve: curve,
-    begin: begin ?? const Offset(0.0, 0.0),
-    end: end ?? const Offset(0.0, 0.0),
-  );
+          delay: delay,
+          duration: duration,
+          curve: curve,
+          begin: begin ?? const Offset(0.0, 0.0),
+          end: end ?? const Offset(0.0, 0.0),
+        );
 
   @override
   Widget build(
-      BuildContext context,
-      Widget child,
-      AnimationController controller,
-      EffectEntry entry,
-      ) {
+    BuildContext context,
+    Widget child,
+    AnimationController controller,
+    EffectEntry entry,
+  ) {
     Animation<Offset> animation = buildAnimation(controller, entry);
     return getOptimizedBuilder<Offset>(
       animation: animation,

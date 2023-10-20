@@ -26,9 +26,9 @@ Widget wrapWithModel<T extends FlutterFlowModel>({
 }
 
 T createModel<T extends FlutterFlowModel>(
-    BuildContext context,
-    T Function() defaultBuilder,
-    ) {
+  BuildContext context,
+  T Function() defaultBuilder,
+) {
   final model = context.read<T?>() ?? defaultBuilder();
   model._init(context);
   return model;
@@ -102,12 +102,12 @@ class FlutterFlowDynamicModels<T extends FlutterFlowModel> {
 
   List<S> getValues<S>(S? Function(T) getValue) {
     return _childrenIndexes.entries
-    // Sort keys by index.
+        // Sort keys by index.
         .sorted((a, b) => a.value.compareTo(b.value))
         .where((e) => _childrenModels[e.key] != null)
-    // Map each model to the desired value and return as list. In order
-    // to preserve index order, rather than removing null values we provide
-    // default values (for types with reasonable defaults).
+        // Map each model to the desired value and return as list. In order
+        // to preserve index order, rather than removing null values we provide
+        // default values (for types with reasonable defaults).
         .map((e) => getValue(_childrenModels[e.key]!) ?? _getDefaultValue<S>()!)
         .toList();
   }
@@ -139,8 +139,8 @@ class FlutterFlowDynamicModels<T extends FlutterFlowModel> {
         _childrenModels.keys
             .toSet()
             .difference(_activeKeys!)
-        // Remove and dispose of unused models since they are  not being used
-        // elsewhere and would not otherwise be disposed.
+            // Remove and dispose of unused models since they are  not being used
+            // elsewhere and would not otherwise be disposed.
             .forEach((k) => _childrenModels.remove(k)?.dispose());
         _activeKeys = null;
       });

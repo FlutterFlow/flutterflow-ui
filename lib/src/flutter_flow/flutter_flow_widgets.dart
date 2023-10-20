@@ -77,61 +77,61 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
   Widget build(BuildContext context) {
     Widget textWidget = loading
         ? Center(
-      child: Container(
-        width: 23,
-        height: 23,
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(
-            widget.options.textStyle!.color ?? Colors.white,
-          ),
-        ),
-      ),
-    )
+            child: Container(
+              width: 23,
+              height: 23,
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  widget.options.textStyle!.color ?? Colors.white,
+                ),
+              ),
+            ),
+          )
         : AutoSizeText(
-      widget.text,
-      style: widget.options.textStyle?.withoutColor(),
-      maxLines: maxLines,
-      overflow: TextOverflow.ellipsis,
-    );
+            widget.text,
+            style: widget.options.textStyle?.withoutColor(),
+            maxLines: maxLines,
+            overflow: TextOverflow.ellipsis,
+          );
 
     final onPressed = widget.onPressed != null
         ? (widget.showLoadingIndicator
-        ? () async {
-      if (loading) {
-        return;
-      }
-      setState(() => loading = true);
-      try {
-        await widget.onPressed!();
-      } finally {
-        if (mounted) {
-          setState(() => loading = false);
-        }
-      }
-    }
-        : () => widget.onPressed!())
+            ? () async {
+                if (loading) {
+                  return;
+                }
+                setState(() => loading = true);
+                try {
+                  await widget.onPressed!();
+                } finally {
+                  if (mounted) {
+                    setState(() => loading = false);
+                  }
+                }
+              }
+            : () => widget.onPressed!())
         : null;
 
     ButtonStyle style = ButtonStyle(
       shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
-            (states) {
+        (states) {
           if (states.contains(MaterialState.hovered) &&
               widget.options.hoverBorderSide != null) {
             return RoundedRectangleBorder(
               borderRadius:
-              widget.options.borderRadius ?? BorderRadius.circular(8),
+                  widget.options.borderRadius ?? BorderRadius.circular(8),
               side: widget.options.hoverBorderSide!,
             );
           }
           return RoundedRectangleBorder(
             borderRadius:
-            widget.options.borderRadius ?? BorderRadius.circular(8),
+                widget.options.borderRadius ?? BorderRadius.circular(8),
             side: widget.options.borderSide ?? BorderSide.none,
           );
         },
       ),
       foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-            (states) {
+        (states) {
           if (states.contains(MaterialState.disabled) &&
               widget.options.disabledTextColor != null) {
             return widget.options.disabledTextColor;
@@ -144,7 +144,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
         },
       ),
       backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-            (states) {
+        (states) {
           if (states.contains(MaterialState.disabled) &&
               widget.options.disabledColor != null) {
             return widget.options.disabledColor;
@@ -165,7 +165,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
       padding: MaterialStateProperty.all(widget.options.padding ??
           const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0)),
       elevation: MaterialStateProperty.resolveWith<double?>(
-            (states) {
+        (states) {
           if (states.contains(MaterialState.hovered) &&
               widget.options.hoverElevation != null) {
             return widget.options.hoverElevation!;
@@ -211,32 +211,32 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
 
 extension _WithoutColorExtension on TextStyle {
   TextStyle withoutColor() => TextStyle(
-    inherit: inherit,
-    color: null,
-    backgroundColor: backgroundColor,
-    fontSize: fontSize,
-    fontWeight: fontWeight,
-    fontStyle: fontStyle,
-    letterSpacing: letterSpacing,
-    wordSpacing: wordSpacing,
-    textBaseline: textBaseline,
-    height: height,
-    leadingDistribution: leadingDistribution,
-    locale: locale,
-    foreground: foreground,
-    background: background,
-    shadows: shadows,
-    fontFeatures: fontFeatures,
-    decoration: decoration,
-    decorationColor: decorationColor,
-    decorationStyle: decorationStyle,
-    decorationThickness: decorationThickness,
-    debugLabel: debugLabel,
-    fontFamily: fontFamily,
-    fontFamilyFallback: fontFamilyFallback,
-    // The _package field is private so unfortunately we can't set it here,
-    // but it's almost always unset anyway.
-    // package: _package,
-    overflow: overflow,
-  );
+        inherit: inherit,
+        color: null,
+        backgroundColor: backgroundColor,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+        textBaseline: textBaseline,
+        height: height,
+        leadingDistribution: leadingDistribution,
+        locale: locale,
+        foreground: foreground,
+        background: background,
+        shadows: shadows,
+        fontFeatures: fontFeatures,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        decorationThickness: decorationThickness,
+        debugLabel: debugLabel,
+        fontFamily: fontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        // The _package field is private so unfortunately we can't set it here,
+        // but it's almost always unset anyway.
+        // package: _package,
+        overflow: overflow,
+      );
 }
