@@ -6,7 +6,7 @@
 
 In your FlutterFlow project, navigate to the code icon and click on "View Code".
 
-<img src="https://github.com/FlutterFlow/flutterflow-ui/blob/main/assets/package1.gif" width="500" />
+<img src="https://raw.githubusercontent.com/flutterflow/flutterflow-ui/main/assets/package1.gif" width="500" />
 
 Here, you will find the FlutterFlow-generated code for your pages and components. Choose the specific page or component you need, then copy the widget code. Paste this code into a new Flutter file within your Flutter project.
 
@@ -61,7 +61,7 @@ __________________________________________
 
 * Begin by right-clicking on the component or widget within your FlutterFlow canvas. Then, select "Copy Widget Code."
 
-<img src="https://github.com/FlutterFlow/flutterflow-ui/blob/main/assets/right-click.png" width="300" />
+<img src="https://raw.githubusercontent.com/flutterflow/flutterflow-ui/main/assets/right-click.png" width="500" />
 
 Alternatively, you can follow similar steps as mentioned above, but click on "View Code" from the Developer Menu. After that, click on the widget in the preview that you want to copy. The code will be displayed on the left-hand side.
 
