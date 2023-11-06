@@ -45,7 +45,7 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 
 ## Cleaning Up Unnecessary Code
 
-In the beginning of the build method, you might encounter the line context.watch<FFAppState>();. This line is beneficial in a FlutterFlow project, but in your Flutter project, you might have a different method for managing global constants and variables. If that's the case, feel free to remove this line of code.
+In the beginning of the build method, you might encounter the line `context.watch<FFAppState>();`. This line is beneficial in a FlutterFlow project, but in your Flutter project, you might have a different method for managing global constants and variables. If that's the case, feel free to remove this line of code.
 
 Additionally, if you're not using the Provider package for state management in your project, you can safely remove the import statement related to it.
 
@@ -78,3 +78,6 @@ Alternatively, you can follow similar steps as mentioned above, but click on "Vi
 * Media Display
 * Rive
 * Swipeable Stack
+
+## Documentation & More Usages
+You can check out our [documentation](https://docs.flutterflow.io/flutter/export-flutterflow-ui-code-to-your-flutter-project) for more examples
