@@ -136,14 +136,14 @@ dynamic getJsonField(
   String jsonPath, [
   bool isForList = false,
 ]) {
-  final field = JsonPath(jsonPath).read(response);
+  final field = JsonPath(jsonPath).readValues(response);
   if (field.isEmpty) {
     return null;
   }
   if (field.length > 1) {
-    return field.map((f) => f.value).toList();
+    return field.toList();
   }
-  final value = field.first.value;
+  final value = field.first;
   return isForList && value is! Iterable ? [value] : value;
 }
 
