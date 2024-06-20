@@ -642,11 +642,11 @@ abstract class FlutterFlowTheme {
   }
 
   @Deprecated('Use primary instead')
-  Color get primaryColor => primary;
+  Color get primaryColor=>primary;
   @Deprecated('Use secondary instead')
-  Color get secondaryColor => secondary;
+  Color get secondaryColor=>secondary;
   @Deprecated('Use tertiary instead')
-  Color get tertiaryColor => tertiary;
+  Color get tertiaryColor=>tertiary;
 
   late Color primary;
   late Color secondary;
@@ -665,8 +665,8 @@ abstract class FlutterFlowTheme {
   late Color error;
   late Color info;
 
-  late Color primaryBtnText;
-  late Color lineColor;
+
+
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -733,11 +733,11 @@ abstract class FlutterFlowTheme {
 
 class LightModeTheme extends FlutterFlowTheme {
   @Deprecated('Use primary instead')
-  Color get primaryColor => primary;
+  Color get primaryColor=>primary;
   @Deprecated('Use secondary instead')
-  Color get secondaryColor => secondary;
+  Color get secondaryColor=>secondary;
   @Deprecated('Use tertiary instead')
-  Color get tertiaryColor => tertiary;
+  Color get tertiaryColor=>tertiary;
 
   late Color primary = const Color(0xFF4B39EF);
   late Color secondary = const Color(0xFF39D2C0);

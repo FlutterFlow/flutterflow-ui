@@ -90,12 +90,10 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
       ),
       iconColor: MaterialStateProperty.resolveWith<Color?>(
         (states) {
-          if (states.contains(MaterialState.disabled) &&
-              widget.disabledIconColor != null) {
+          if (states.contains(MaterialState.disabled) && widget.disabledIconColor != null) {
             return widget.disabledIconColor;
           }
-          if (states.contains(MaterialState.hovered) &&
-              widget.hoverIconColor != null) {
+          if (states.contains(MaterialState.hovered) && widget.hoverIconColor != null) {
             return widget.hoverIconColor;
           }
           return iconColor;
@@ -103,25 +101,32 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
       ),
       backgroundColor: MaterialStateProperty.resolveWith<Color?>(
         (states) {
-          if (states.contains(MaterialState.disabled) &&
-              widget.disabledColor != null) {
+          if (states.contains(MaterialState.disabled) && widget.disabledColor != null) {
             return widget.disabledColor;
           }
-          if (states.contains(MaterialState.hovered) &&
-              widget.hoverColor != null) {
+          if (states.contains(MaterialState.hovered) && widget.hoverColor != null) {
             return widget.hoverColor;
           }
 
           return widget.fillColor;
         },
       ),
+      overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(MaterialState.pressed)) {
+          return null;
+        }
+        return widget.hoverColor == null ? null : Colors.transparent;
+      }),
     );
 
     return SizedBox(
       width: widget.buttonSize,
       height: widget.buttonSize,
       child: Theme(
-        data: Theme.of(context).copyWith(useMaterial3: true),
+        data: ThemeData.from(
+          colorScheme: Theme.of(context).colorScheme,
+          useMaterial3: true,
+        ),
         child: IgnorePointer(
           ignoring: (widget.showLoadingIndicator && loading),
           child: IconButton(

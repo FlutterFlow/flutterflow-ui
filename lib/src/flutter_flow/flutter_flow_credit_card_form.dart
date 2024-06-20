@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
-export 'package:flutter_credit_card/flutter_credit_card.dart'
-    show CreditCardModel;
+export 'package:flutter_credit_card/flutter_credit_card.dart' show CreditCardModel;
 
 /// Modified from https://pub.dev/packages/flutter_credit_card (see license below)
 
@@ -31,17 +30,13 @@ class FlutterFlowCreditCardForm extends StatefulWidget {
   final InputDecoration inputDecoration;
 
   @override
-  _FlutterFlowCreditCardFormState createState() =>
-      _FlutterFlowCreditCardFormState();
+  _FlutterFlowCreditCardFormState createState() => _FlutterFlowCreditCardFormState();
 }
 
 class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
-  final MaskedTextController _cardNumberController =
-      MaskedTextController(mask: '0000 0000 0000 0000');
-  final TextEditingController _expiryDateController =
-      MaskedTextController(mask: '00/00');
-  final TextEditingController _cvvCodeController =
-      MaskedTextController(mask: '0000');
+  final MaskedTextController _cardNumberController = MaskedTextController(mask: '0000 0000 0000 0000');
+  final TextEditingController _expiryDateController = MaskedTextController(mask: '00/00');
+  final TextEditingController _cvvCodeController = MaskedTextController(mask: '0000');
 
   FocusNode cvvFocusNode = FocusNode();
   FocusNode cardNumberNode = FocusNode();
@@ -66,12 +61,11 @@ class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
       _cvvCodeController.text = widget.creditCardModel.cvvCode;
     }
     cvvFocusNode.addListener(textFieldFocusDidChange);
-    _cardNumberController.addListener(() => setState(
-        () => widget.creditCardModel.cardNumber = _cardNumberController.text));
-    _expiryDateController.addListener(() => setState(
-        () => widget.creditCardModel.expiryDate = _expiryDateController.text));
-    _cvvCodeController.addListener(() => setState(
-        () => widget.creditCardModel.cvvCode = _cvvCodeController.text));
+    _cardNumberController
+        .addListener(() => setState(() => widget.creditCardModel.cardNumber = _cardNumberController.text));
+    _expiryDateController
+        .addListener(() => setState(() => widget.creditCardModel.expiryDate = _expiryDateController.text));
+    _cvvCodeController.addListener(() => setState(() => widget.creditCardModel.cvvCode = _cvvCodeController.text));
   }
 
   @override
@@ -91,8 +85,7 @@ class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
               child: TextFormField(
                 obscureText: widget.obscureNumber,
                 controller: _cardNumberController,
-                onEditingComplete: () =>
-                    FocusScope.of(context).requestFocus(expiryDateNode),
+                onEditingComplete: () => FocusScope.of(context).requestFocus(expiryDateNode),
                 style: widget.textStyle,
                 decoration: widget.inputDecoration.copyWith(
                   labelText: 'Card number',
@@ -144,9 +137,7 @@ class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
                         final int year = int.parse('20${date.last}');
                         final DateTime cardDate = DateTime(year, month);
 
-                        if (cardDate.isBefore(now) ||
-                            month > 12 ||
-                            month == 0) {
+                        if (cardDate.isBefore(now) || month > 12 || month == 0) {
                           return 'Please input a valid date';
                         }
                         return null;
@@ -172,9 +163,7 @@ class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
                       validator: (value) {
-                        if (value == null ||
-                            value.isEmpty ||
-                            value.length < 3) {
+                        if (value == null || value.isEmpty || value.length < 3) {
                           return 'Please input a valid CVV';
                         }
                         return null;
@@ -191,8 +180,7 @@ class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
   /// Credit Card prefix patterns as of March 2019
   /// A [List<String>] represents a range.
   /// i.e. ['51', '55'] represents the range of cards starting with '51' to those starting with '55'
-  Map<CardType, Set<List<String>>> cardNumPatterns =
-      <CardType, Set<List<String>>>{
+  Map<CardType, Set<List<String>>> cardNumPatterns = <CardType, Set<List<String>>>{
     CardType.visa: <List<String>>{
       <String>['4'],
     },
@@ -244,8 +232,7 @@ class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
             final int ccPrefixAsInt = int.parse(ccPatternStr);
             final int startPatternPrefixAsInt = int.parse(patternRange[0]);
             final int endPatternPrefixAsInt = int.parse(patternRange[1]);
-            if (ccPrefixAsInt >= startPatternPrefixAsInt &&
-                ccPrefixAsInt <= endPatternPrefixAsInt) {
+            if (ccPrefixAsInt >= startPatternPrefixAsInt && ccPrefixAsInt <= endPatternPrefixAsInt) {
               // Found a match
               cardType = type;
               break;

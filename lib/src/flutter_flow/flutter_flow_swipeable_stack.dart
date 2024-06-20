@@ -1,93 +1,77 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:swipeable_card_stack/swipeable_card_stack.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
 class FlutterFlowSwipeableStack extends StatefulWidget {
   const FlutterFlowSwipeableStack({
-    Key? key,
-    required this.topCardHeightFraction,
-    required this.middleCardHeightFraction,
-    required this.bottomCardHeightFraction,
-    required this.topCardWidthFraction,
-    required this.middleCardWidthFraction,
-    required this.bottomCardWidthFraction,
+    super.key,
     required this.itemBuilder,
     required this.itemCount,
     required this.controller,
-    required this.enableSwipeUp,
-    required this.enableSwipeDown,
     required this.onSwipeFn,
     required this.onRightSwipe,
     required this.onLeftSwipe,
     required this.onUpSwipe,
     required this.onDownSwipe,
-  }) : super(key: key);
+    required this.loop,
+    required this.cardDisplayCount,
+    required this.scale,
+    this.maxAngle,
+    this.threshold,
+    this.cardPadding,
+    this.backCardOffset,
+  });
 
-  final double topCardHeightFraction;
-  final double middleCardHeightFraction;
-  final double topCardWidthFraction;
-  final double bottomCardHeightFraction;
-  final double middleCardWidthFraction;
-  final double bottomCardWidthFraction;
   final Widget Function(BuildContext, int) itemBuilder;
-  final SwipeableCardSectionController controller;
+  final CardSwiperController controller;
   final int itemCount;
-  final bool enableSwipeUp;
-  final bool enableSwipeDown;
   final Function(int) onSwipeFn;
   final Function(int) onRightSwipe;
   final Function(int) onLeftSwipe;
   final Function(int) onUpSwipe;
   final Function(int) onDownSwipe;
+  final bool loop;
+  final int cardDisplayCount;
+  final double scale;
+  final double? maxAngle;
+  final double? threshold;
+  final EdgeInsetsGeometry? cardPadding;
+  final Offset? backCardOffset;
 
   @override
   _FFSwipeableStackState createState() => _FFSwipeableStackState();
 }
 
-List<Widget> getItems(int itemCount, BuildContext context,
-    Widget Function(BuildContext, int) itemBuilder) {
-  List<Widget> items = [];
-  var limit = min(3, itemCount);
-  for (int i = 0; i < limit; i++) {
-    items.add(itemBuilder(context, i));
-  }
-  return items;
-}
-
 class _FFSwipeableStackState extends State<FlutterFlowSwipeableStack> {
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          SwipeableCardsSection(
-            cardController: widget.controller,
-            context: context,
-            cardWidthTopMul: widget.topCardWidthFraction,
-            cardHeightTopMul: widget.topCardHeightFraction,
-            cardWidthBottomMul: widget.bottomCardWidthFraction,
-            cardHeightBottomMul: widget.bottomCardHeightFraction,
-            cardWidthMiddleMul: widget.middleCardWidthFraction,
-            cardHeightMiddleMul: widget.middleCardHeightFraction,
-            items: getItems(widget.itemCount, context, widget.itemBuilder),
-            onCardSwiped: (dir, int index, _) {
-              if (index + 3 < widget.itemCount) {
-                widget.controller
-                    .addItem(widget.itemBuilder(context, index + 3));
-              }
-              widget.onSwipeFn(index);
-              if (dir == Direction.left) {
-                widget.onLeftSwipe(index);
-              } else if (dir == Direction.right) {
-                widget.onRightSwipe(index);
-              } else if (dir == Direction.up) {
-                widget.onUpSwipe(index);
-              } else if (dir == Direction.down) {
-                widget.onDownSwipe(index);
-              }
-            },
-            enableSwipeUp: widget.enableSwipeUp,
-            enableSwipeDown: widget.enableSwipeDown,
-          ),
-        ],
-      );
+  Widget build(BuildContext context) {
+    return CardSwiper(
+      controller: widget.controller,
+      onSwipe: (previousIndex, currentIndex, direction) {
+        widget.onSwipeFn(previousIndex);
+        if (direction == CardSwiperDirection.left) {
+          widget.onLeftSwipe(previousIndex);
+        } else if (direction == CardSwiperDirection.right) {
+          widget.onRightSwipe(previousIndex);
+        } else if (direction == CardSwiperDirection.top) {
+          widget.onUpSwipe(previousIndex);
+        } else if (direction == CardSwiperDirection.bottom) {
+          widget.onDownSwipe(previousIndex);
+        }
+        return true;
+      },
+      cardsCount: widget.itemCount,
+      cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
+        return widget.itemBuilder(context, index);
+      },
+      isLoop: widget.loop,
+      maxAngle: widget.maxAngle ?? 30,
+      threshold: widget.threshold != null ? (100 * widget.threshold!).round() : 50,
+      scale: widget.scale,
+      padding: widget.cardPadding ?? const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+      backCardOffset: widget.backCardOffset ?? const Offset(0, 40),
+      numberOfCardsDisplayed: min(widget.cardDisplayCount, widget.itemCount),
+    );
+  }
 }

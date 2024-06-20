@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
 class FlutterFlowRiveController extends SimpleAnimation {
@@ -11,9 +12,11 @@ class FlutterFlowRiveController extends SimpleAnimation {
 
   bool shouldLoop;
   final _reactivate = ValueNotifier<bool>(false);
+
   ValueListenable<bool> get changeReactivate => _reactivate;
 
   bool get reactivate => _reactivate.value;
+
   set reactivate(bool value) {
     if (_reactivate.value != value) {
       _reactivate.value = value;
@@ -58,8 +61,7 @@ class FlutterFlowRiveController extends SimpleAnimation {
 
     /// Stop after one loop if not a continuous animation
     if (!shouldLoop &&
-        (instance?.animation.loop == Loop.loop ||
-            instance?.animation.loop == Loop.pingPong) &&
+        (instance?.animation.loop == Loop.loop || instance?.animation.loop == Loop.pingPong) &&
         instance!.didLoop) {
       isActive = false;
     }
