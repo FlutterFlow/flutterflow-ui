@@ -47,7 +47,7 @@ dependencies:
   smooth_page_indicator:
   shared_preferences: 2.2.2
   swipeable_card_stack: 0.0.5
-  timeago: 3.2.2
+  timeago: 3.6.1
   table_calendar: 3.0.9
   provider: 6.0.4
 
