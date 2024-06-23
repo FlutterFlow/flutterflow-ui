@@ -53,7 +53,6 @@ dependencies:
   mime_type: 1.0.0
   native_device_orientation: 1.2.1
   page_transition: 2.1.0
-  pdfx: 2.6.0
   percent_indicator: 4.2.2
   photo_view: 0.14.0
   plugin_platform_interface: 2.1.8
