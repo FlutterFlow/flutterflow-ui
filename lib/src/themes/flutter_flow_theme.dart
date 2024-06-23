@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutterflow_ui/src/themes/custom_color.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'default_dark_theme.dart';
-import 'default_light_theme.dart';
-
-const kThemeModeKey = '__theme_mode__';
-SharedPreferences? _preferences;
-
-abstract class FFThemeModel {
+mixin FFTheme {
   Color get primary;
   Color get secondary;
   Color get tertiary;
@@ -57,36 +49,6 @@ abstract class FFThemeModel {
   TextStyle get bodyMedium;
   String get bodySmallFamily;
   TextStyle get bodySmall;
-
-  List<CustomColor> get customColors => [];
-}
-
-abstract class FFTheme {
-  static Future<void> initialize() async {
-    _preferences = await SharedPreferences.getInstance();
-  }
-
-  static of(BuildContext context) =>
-      Theme.of(context).brightness == Brightness.dark
-          ? FFDefaultDarkModeTheme()
-          : FFDefaultLightModeTheme();
-
-  static void saveThemeMode(ThemeMode mode) {
-    if (mode == ThemeMode.system) {
-      _preferences?.remove(kThemeModeKey);
-    } else {
-      _preferences?.setBool(kThemeModeKey, mode == ThemeMode.dark);
-    }
-  }
-
-  static ThemeMode get themeMode {
-    final darkMode = _preferences?.getBool(kThemeModeKey);
-    return darkMode == null
-        ? ThemeMode.system
-        : darkMode
-            ? ThemeMode.dark
-            : ThemeMode.light;
-  }
 }
 
 extension TextStyleHelper on TextStyle {
