@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class FlutterFlowCountController extends StatefulWidget {
   const FlutterFlowCountController({
-    Key? key,
+    super.key,
     required this.decrementIconBuilder,
     required this.incrementIconBuilder,
     required this.countBuilder,
@@ -12,7 +12,7 @@ class FlutterFlowCountController extends StatefulWidget {
     this.minimum,
     this.maximum,
     this.contentPadding = const EdgeInsets.symmetric(horizontal: 25.0),
-  }) : super(key: key);
+  });
 
   final Widget Function(bool enabled) decrementIconBuilder;
   final Widget Function(bool enabled) incrementIconBuilder;

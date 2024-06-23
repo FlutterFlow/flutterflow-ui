@@ -8,6 +8,7 @@ bool _isVideoPath(String path) =>
 
 class FlutterFlowMediaDisplay extends StatelessWidget {
   const FlutterFlowMediaDisplay({
+    super.key,
     required this.path,
     required this.imageBuilder,
     required this.videoPlayerBuilder,

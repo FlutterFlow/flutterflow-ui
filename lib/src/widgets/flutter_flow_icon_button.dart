@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FlutterFlowIconButton extends StatefulWidget {
   const FlutterFlowIconButton({
-    Key? key,
+    super.key,
     required this.icon,
     this.borderColor,
     this.borderRadius,
@@ -16,7 +16,7 @@ class FlutterFlowIconButton extends StatefulWidget {
     this.hoverIconColor,
     this.onPressed,
     this.showLoadingIndicator = false,
-  }) : super(key: key);
+  });
 
   final Widget icon;
   final double? borderRadius;
@@ -90,10 +90,12 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
       ),
       iconColor: MaterialStateProperty.resolveWith<Color?>(
         (states) {
-          if (states.contains(MaterialState.disabled) && widget.disabledIconColor != null) {
+          if (states.contains(MaterialState.disabled) &&
+              widget.disabledIconColor != null) {
             return widget.disabledIconColor;
           }
-          if (states.contains(MaterialState.hovered) && widget.hoverIconColor != null) {
+          if (states.contains(MaterialState.hovered) &&
+              widget.hoverIconColor != null) {
             return widget.hoverIconColor;
           }
           return iconColor;
@@ -101,10 +103,12 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
       ),
       backgroundColor: MaterialStateProperty.resolveWith<Color?>(
         (states) {
-          if (states.contains(MaterialState.disabled) && widget.disabledColor != null) {
+          if (states.contains(MaterialState.disabled) &&
+              widget.disabledColor != null) {
             return widget.disabledColor;
           }
-          if (states.contains(MaterialState.hovered) && widget.hoverColor != null) {
+          if (states.contains(MaterialState.hovered) &&
+              widget.hoverColor != null) {
             return widget.hoverColor;
           }
 

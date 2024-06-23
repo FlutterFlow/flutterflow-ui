@@ -67,9 +67,11 @@ class _FFSwipeableStackState extends State<FlutterFlowSwipeableStack> {
       },
       isLoop: widget.loop,
       maxAngle: widget.maxAngle ?? 30,
-      threshold: widget.threshold != null ? (100 * widget.threshold!).round() : 50,
+      threshold:
+          widget.threshold != null ? (100 * widget.threshold!).round() : 50,
       scale: widget.scale,
-      padding: widget.cardPadding ?? const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+      padding: widget.cardPadding ??
+          const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
       backCardOffset: widget.backCardOffset ?? const Offset(0, 40),
       numberOfCardsDisplayed: min(widget.cardDisplayCount, widget.itemCount),
     );

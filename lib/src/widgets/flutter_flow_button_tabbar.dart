@@ -13,21 +13,14 @@ typedef _LayoutCallback = void Function(
 
 class _TabLabelBarRenderer extends RenderFlex {
   _TabLabelBarRenderer({
-    required Axis direction,
-    required MainAxisSize mainAxisSize,
-    required MainAxisAlignment mainAxisAlignment,
-    required CrossAxisAlignment crossAxisAlignment,
-    required TextDirection textDirection,
-    required VerticalDirection verticalDirection,
+    required super.direction,
+    required super.mainAxisSize,
+    required super.mainAxisAlignment,
+    required super.crossAxisAlignment,
+    required TextDirection super.textDirection,
+    required super.verticalDirection,
     required this.onPerformLayout,
-  }) : super(
-          direction: direction,
-          mainAxisSize: mainAxisSize,
-          mainAxisAlignment: mainAxisAlignment,
-          crossAxisAlignment: crossAxisAlignment,
-          textDirection: textDirection,
-          verticalDirection: verticalDirection,
-        );
+  });
 
   _LayoutCallback onPerformLayout;
 
@@ -64,11 +57,10 @@ class _TabLabelBarRenderer extends RenderFlex {
 // upon layout. The tab widths are only used at paint time (see _IndicatorPainter)
 // or in response to input.
 class _TabLabelBar extends Flex {
-  _TabLabelBar({
-    required List<Widget> children,
+  const _TabLabelBar({
+    required super.children,
     required this.onPerformLayout,
   }) : super(
-          children: children,
           direction: Axis.horizontal,
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -170,15 +162,12 @@ class _IndicatorPainter extends CustomPainter {
 
 class _TabBarScrollPosition extends ScrollPositionWithSingleContext {
   _TabBarScrollPosition({
-    required ScrollPhysics physics,
-    required ScrollContext context,
-    required ScrollPosition? oldPosition,
+    required super.physics,
+    required super.context,
+    required super.oldPosition,
     required this.tabBar,
   }) : super(
           initialPixels: null,
-          physics: physics,
-          context: context,
-          oldPosition: oldPosition,
         );
 
   final _FlutterFlowButtonTabBarState tabBar;
@@ -245,7 +234,7 @@ class FlutterFlowButtonTabBar extends StatefulWidget
   /// [DefaultTabController] ancestor.
   ///
   const FlutterFlowButtonTabBar({
-    Key? key,
+    super.key,
     required this.tabs,
     this.controller,
     this.isScrollable = false,
@@ -269,7 +258,7 @@ class FlutterFlowButtonTabBar extends StatefulWidget
     this.padding = EdgeInsets.zero,
     this.borderRadius = 8.0,
     this.elevation = 0,
-  }) : super(key: key);
+  });
 
   /// Typically a list of two or more [Tab] widgets.
   ///
@@ -429,10 +418,10 @@ class _FlutterFlowButtonTabBarState extends State<FlutterFlowButtonTabBar>
     assert(() {
       if (newController == null) {
         throw FlutterError(
-          'No TabController for ${widget.runtimeType}.\n'
-          'When creating a ${widget.runtimeType}, you must either provide an explicit '
+          'No TabController for \${widget.runtimeType}.\\n'
+          'When creating a \${widget.runtimeType}, you must either provide an explicit '
           'TabController using the "controller" property, or you must ensure that there '
-          'is a DefaultTabController above the ${widget.runtimeType}.\n'
+          'is a DefaultTabController above the \${widget.runtimeType}.\\n'
           'In this case, there was neither an explicit controller nor a default controller.',
         );
       }
@@ -490,7 +479,7 @@ class _FlutterFlowButtonTabBarState extends State<FlutterFlowButtonTabBar>
 
     if (widget.tabs.length > _tabKeys.length) {
       final int delta = widget.tabs.length - _tabKeys.length;
-      _tabKeys.addAll(List<GlobalKey>.generate(delta, (int n) => GlobalKey()));
+      _tabKeys.addAll(List<GlobalKey>.generate(delta, (n) => GlobalKey()));
     } else if (widget.tabs.length < _tabKeys.length) {
       _tabKeys.removeRange(widget.tabs.length, _tabKeys.length);
     }
@@ -719,16 +708,16 @@ class _FlutterFlowButtonTabBarState extends State<FlutterFlowButtonTabBar>
       child: TextButton(
         onPressed: () => _handleTap(index),
         style: ButtonStyle(
-          elevation: MaterialStateProperty.all(
+          elevation: WidgetStateProperty.all(
               widget.useToggleButtonStyle ? 0 : widget.elevation),
 
           /// give a pretty small minimum size
-          minimumSize: MaterialStateProperty.all(const Size(10, 10)),
-          padding: MaterialStateProperty.all(EdgeInsets.zero),
-          textStyle: MaterialStateProperty.all(textStyle),
-          foregroundColor: MaterialStateProperty.all(textColor),
+          minimumSize: WidgetStateProperty.all(const Size(10, 10)),
+          padding: WidgetStateProperty.all(EdgeInsets.zero),
+          textStyle: WidgetStateProperty.all(textStyle),
+          foregroundColor: WidgetStateProperty.all(textColor),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          shape: MaterialStateProperty.all(
+          shape: WidgetStateProperty.all(
             widget.useToggleButtonStyle
                 ? const RoundedRectangleBorder(
                     side: BorderSide.none,
@@ -761,7 +750,7 @@ class _FlutterFlowButtonTabBarState extends State<FlutterFlowButtonTabBar>
     if (_debugHasScheduledValidTabsCountCheck) {
       return true;
     }
-    WidgetsBinding.instance.addPostFrameCallback((Duration duration) {
+    WidgetsBinding.instance.addPostFrameCallback((duration) {
       _debugHasScheduledValidTabsCountCheck = false;
       if (!mounted) {
         return;
@@ -769,8 +758,8 @@ class _FlutterFlowButtonTabBarState extends State<FlutterFlowButtonTabBar>
       assert(() {
         if (_controller!.length != widget.tabs.length) {
           throw FlutterError(
-            "Controller's length property (${_controller!.length}) does not match the "
-            "number of tabs (${widget.tabs.length}) present in TabBar's tabs property.",
+            "Controller's length property (\${_controller!.length}) does not match the "
+            "number of tabs (\${widget.tabs.length}) present in TabBar's tabs property.",
           );
         }
         return true;
@@ -793,7 +782,7 @@ class _FlutterFlowButtonTabBarState extends State<FlutterFlowButtonTabBar>
     }
 
     final List<Widget> wrappedTabs =
-        List<Widget>.generate(widget.tabs.length, (int index) {
+        List<Widget>.generate(widget.tabs.length, (index) {
       return _buildStyledTab(widget.tabs[index], index);
     });
 
