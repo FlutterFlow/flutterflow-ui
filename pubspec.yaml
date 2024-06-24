@@ -20,7 +20,7 @@ dependencies:
   collection: 1.18.0
   data_table_2: 2.5.10
   dropdown_button2: 2.3.9
-  easy_debounce: 2.0.3
+  easy_debounce: 2.0.1
   emoji_flag_converter: 1.1.0
   equatable: 2.0.5
   expandable: 5.0.1
