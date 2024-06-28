@@ -14,9 +14,10 @@ class FormFieldController<T> extends ValueNotifier<T?> {
 // we need to use this controller to avoid a pass by reference issue
 // that can result in the initial value being modified.
 class FormListFieldController<T> extends FormFieldController<List<T>> {
-  final List<T>? _initialListValue;
+  FormListFieldController(super.initialValue)
+      : _initialListValue = List<T>.from(initialValue ?? []);
 
-  FormListFieldController(super.initialValue) : _initialListValue = List<T>.from(initialValue ?? []);
+  final List<T>? _initialListValue;
 
   @override
   void reset() => value = List<T>.from(_initialListValue ?? []);

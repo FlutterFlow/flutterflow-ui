@@ -1,6 +1,6 @@
-# flutterflow_ui
+# FlutterFlow UI
 
-`flutterflow_ui` simplifies the process of adding FlutterFlow-generated UI code to your Flutter projects. It streamlines integration, saving you time and effort in the UI development for your Flutter app.
+`flutterflow_ui` simplifies the process of adding FlutterFlow generated UI code to your Flutter projects. It streamlines integration, saving you time and effort in the UI development for your Flutter app.
 
 ## Generate code in your FlutterFlow project
 
@@ -25,11 +25,11 @@ dependencies:
 ```
 Remember to run `flutter pub get`
 
-## Replace the flutter_flow dependencies with the package import
+## Replace the `flutter_flow` dependencies with the package import
 
 In your imports, you will see a bunch of `flutter_flow/flutter_flow...` imports that are usually present in a FlutterFlow project but with this package you can resolve these errors. 
 
-Remove such imports
+Remove such imports:
 ```dart
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -37,13 +37,13 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 ```
 
-And replace it with the package import.
+And replace it with the package import:
 
 ```dart
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 ```
 
-## Cleaning Up Unnecessary Code
+## Cleaning up unnecessary code
 
 In the beginning of the build method, you might encounter the line `context.watch<FFAppState>();`. This line is beneficial in a FlutterFlow project, but in your Flutter project, you might have a different method for managing global constants and variables. If that's the case, feel free to remove this line of code.
 
@@ -72,12 +72,30 @@ Alternatively, you can follow similar steps as mentioned above, but click on "Vi
 ## Supports the following FlutterFlow widgets
 
 * Layout Elements supported by Material/Cupertino package
+* Ad Banner
+* Audio Player
 * Calendar
 * Charts
+* Checkbox Group
+* Choice Chips
+* Counter Button
 * Credit Card
+* Data Table
+* Drop Down
+* Expandable Image & Circle Image
+* Google Map
+* Icon Button
+* Language Selector
 * Media Display
+* Mux Broadcast
+* Radio Button
 * Rive
+* Static Map
 * Swipeable Stack
+* Timer
+* Toggle Icon
+* Tab Bar
+* Web View
 
-## Documentation & More Usages
-You can check out our [documentation](https://docs.flutterflow.io/flutter/export-flutterflow-ui-code-to-your-flutter-project) for more examples
+## Documentation & more usages
+You can check out our [documentation](https://docs.flutterflow.io/flutter/export-flutterflow-ui-code-to-your-flutter-project) for more examples.

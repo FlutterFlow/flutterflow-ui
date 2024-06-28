@@ -1,3 +1,9 @@
+## 0.3.0
+
+- Add support for new UI widgets available in current FlutterFlow release
+- Update utility functions to support new FlutterFlow code generation
+- Update dependencies
+
 ## 0.2.0
 
 **Breaking changes**

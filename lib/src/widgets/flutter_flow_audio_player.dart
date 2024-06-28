@@ -26,7 +26,7 @@ export 'package:assets_audio_player/assets_audio_player.dart';
 
 class FlutterFlowAudioPlayer extends StatefulWidget {
   const FlutterFlowAudioPlayer({
-    Key? key,
+    super.key,
     required this.audio,
     required this.titleTextStyle,
     required this.playbackDurationTextStyle,
@@ -37,7 +37,7 @@ class FlutterFlowAudioPlayer extends StatefulWidget {
     required this.elevation,
     this.pauseOnNavigate = true,
     required this.playInBackground,
-  }) : super(key: key);
+  });
 
   final Audio audio;
   final TextStyle titleTextStyle;
@@ -51,7 +51,7 @@ class FlutterFlowAudioPlayer extends StatefulWidget {
   final PlayInBackground playInBackground;
 
   @override
-  _FlutterFlowAudioPlayerState createState() => _FlutterFlowAudioPlayerState();
+  State<FlutterFlowAudioPlayer> createState() => _FlutterFlowAudioPlayerState();
 }
 
 class _FlutterFlowAudioPlayerState extends State<FlutterFlowAudioPlayer>
@@ -207,6 +207,7 @@ class _FlutterFlowAudioPlayerState extends State<FlutterFlowAudioPlayer>
 
 class PositionSeekWidget extends StatefulWidget {
   const PositionSeekWidget({
+    super.key,
     required this.currentPosition,
     required this.duration,
     required this.seekTo,
@@ -221,7 +222,7 @@ class PositionSeekWidget extends StatefulWidget {
   final Color? inactiveTrackColor;
 
   @override
-  _PositionSeekWidgetState createState() => _PositionSeekWidgetState();
+  State<PositionSeekWidget> createState() => _PositionSeekWidgetState();
 }
 
 class _PositionSeekWidgetState extends State<PositionSeekWidget> {
