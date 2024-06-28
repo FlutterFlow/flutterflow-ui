@@ -110,6 +110,7 @@ class FlutterFlowDataTableController<T> extends DataTableSource {
   int get selectedRowCount => selectedRows.length;
 }
 
+/// A widget that displays tabular data in a grid format.
 class FlutterFlowDataTable<T> extends StatefulWidget {
   const FlutterFlowDataTable({
     super.key,

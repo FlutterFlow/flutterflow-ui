@@ -63,7 +63,7 @@ class FlutterFlowLanguageSelector extends StatelessWidget {
   final IconData? dropdownIcon;
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
         width: width,
         height: height,
         child: _LanguagePickerDropdown(

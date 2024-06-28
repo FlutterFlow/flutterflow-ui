@@ -12,9 +12,54 @@ extension DateTimeExtension on DateTime {
   DateTime get endOfDay => DateTime(year, month, day, 23, 59);
 }
 
+/// A customizable calendar widget for FlutterFlow.
+///
+/// The `FlutterFlowCalendar` widget allows you to display a calendar with various customization options.
+/// You can customize the color, date format, starting day of the week, header style, and more.
+///
+/// To use this widget, simply create an instance of `FlutterFlowCalendar` and pass in the desired parameters.
+/// You can also provide a callback function to handle changes in the selected date range.
+///
+/// Example usage:
+/// ```dart
+/// FlutterFlowCalendar(
+///   color: Colors.blue,
+///   onChange: (DateTimeRange? selectedRange) {
+///     // Handle selected date range change
+///   },
+///   initialDate: DateTime.now(),
+///   weekFormat: true,
+///   weekStartsMonday: true,
+///   twoRowHeader: true,
+///   iconColor: Colors.white,
+///   dateStyle: TextStyle(fontSize: 16),
+///   dayOfWeekStyle: TextStyle(fontWeight: FontWeight.bold),
+///   inactiveDateStyle: TextStyle(color: Colors.grey),
+///   selectedDateStyle: TextStyle(color: Colors.red),
+///   titleStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+///   rowHeight: 40,
+///   locale: 'en_US',
+/// )
+/// ```
 class FlutterFlowCalendar extends StatefulWidget {
+  /// Creates a new instance of [FlutterFlowCalendar].
+  ///
+  /// - `color` parameter specifies the background color of the calendar.
+  /// - `onChange` parameter is a callback function that will be called when the selected date range changes.
+  /// - `initialDate` parameter specifies the initial date to be displayed on the calendar.
+  /// - `weekFormat` parameter determines whether the calendar should be displayed in week format.
+  /// - `weekStartsMonday` parameter determines whether the week starts on Monday.
+  /// - `twoRowHeader` parameter determines whether the header should be displayed in two rows.
+  /// - `iconColor` parameter specifies the color of the icons used in the calendar.
+  /// - `dateStyle` parameter specifies the text style for the dates.
+  /// - `dayOfWeekStyle` parameter specifies the text style for the day of the week labels.
+  /// - `inactiveDateStyle` parameter specifies the text style for inactive dates.
+  /// - `selectedDateStyle` parameter specifies the text style for selected dates.
+  /// - `titleStyle` parameter specifies the text style for the calendar title.
+  /// - `rowHeight` parameter specifies the height of each row in the calendar.
+  /// - `locale` parameter specifies the locale to be used for formatting dates.
   const FlutterFlowCalendar({
-    Key? key,
+    super.key,
     required this.color,
     this.onChange,
     this.initialDate,
@@ -29,25 +74,52 @@ class FlutterFlowCalendar extends StatefulWidget {
     this.titleStyle,
     this.rowHeight,
     this.locale,
-  }) : super(key: key);
+  });
 
+  /// Determines whether the calendar should be displayed in week format.
   final bool weekFormat;
+
+  /// Determines whether the week starts on Monday.
   final bool weekStartsMonday;
+
+  /// Determines whether the header should have two rows.
   final bool twoRowHeader;
+
+  /// The color of the calendar.
   final Color color;
+
+  /// A callback function that is called when the selected date range changes.
   final void Function(DateTimeRange?)? onChange;
+
+  /// The initial date to be displayed on the calendar.
   final DateTime? initialDate;
+
+  /// The color of the icons in the calendar.
   final Color? iconColor;
+
+  /// The text style for the dates displayed on the calendar.
   final TextStyle? dateStyle;
+
+  /// The text style for the day of the week displayed on the calendar.
   final TextStyle? dayOfWeekStyle;
+
+  /// The text style for the inactive dates on the calendar.
   final TextStyle? inactiveDateStyle;
+
+  /// The text style for the selected dates on the calendar.
   final TextStyle? selectedDateStyle;
+
+  /// The text style for the title of the calendar.
   final TextStyle? titleStyle;
+
+  /// The height of each row in the calendar.
   final double? rowHeight;
+
+  /// The locale to be used for formatting dates.
   final String? locale;
 
   @override
-  State<StatefulWidget> createState() => _FlutterFlowCalendarState();
+  State<FlutterFlowCalendar> createState() => _FlutterFlowCalendarState();
 }
 
 class _FlutterFlowCalendarState extends State<FlutterFlowCalendar> {
@@ -191,7 +263,7 @@ class _FlutterFlowCalendarState extends State<FlutterFlowCalendar> {
 
 class CalendarHeader extends StatelessWidget {
   const CalendarHeader({
-    Key? key,
+    super.key,
     required this.focusedDay,
     required this.onLeftChevronTap,
     required this.onRightChevronTap,
@@ -200,7 +272,7 @@ class CalendarHeader extends StatelessWidget {
     this.titleStyle,
     this.locale,
     this.twoRowHeader = false,
-  }) : super(key: key);
+  });
 
   final DateTime focusedDay;
   final VoidCallback onLeftChevronTap;
@@ -270,12 +342,12 @@ class CalendarHeader extends StatelessWidget {
 
 class CustomIconButton extends StatelessWidget {
   const CustomIconButton({
-    Key? key,
+    super.key,
     required this.icon,
     required this.onTap,
     this.margin = const EdgeInsets.symmetric(horizontal: 4),
     this.padding = const EdgeInsets.all(10),
-  }) : super(key: key);
+  });
 
   final Icon icon;
   final VoidCallback onTap;

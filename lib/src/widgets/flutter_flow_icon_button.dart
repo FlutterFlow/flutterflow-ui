@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+/// A customizable icon button widget.
 class FlutterFlowIconButton extends StatefulWidget {
+  /// Creates a [FlutterFlowIconButton].
+  ///
+  /// - [icon] parameter is required and specifies the widget to be used as the icon.
+  /// - [borderRadius] parameter specifies the border radius of the button.
+  /// - [buttonSize] parameter specifies the size of the button.
+  /// - [fillColor] parameter specifies the fill color of the button.
+  /// - [disabledColor] parameter specifies the color of the button when it is disabled.
+  /// - [disabledIconColor] parameter specifies the color of the icon when the button is disabled.
+  /// - [hoverColor] parameter specifies the color of the button when it is hovered.
+  /// - [hoverIconColor] parameter specifies the color of the icon when the button is hovered.
+  /// - [borderColor] parameter specifies the border color of the button.
+  /// - [borderWidth] parameter specifies the width of the button's border.
+  /// - [showLoadingIndicator] parameter specifies whether to show a loading indicator on the button.
+  /// - [onPressed] parameter specifies the callback function to be called when the button is pressed.
   const FlutterFlowIconButton({
     super.key,
     required this.icon,

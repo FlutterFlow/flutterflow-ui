@@ -28,7 +28,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/src/utils/form_field_controller.dart';
 
+/// A custom radio button widget that allows the user to select a single option from a list of options.
 class FlutterFlowRadioButton extends StatefulWidget {
+  /// Creates a [FlutterFlowRadioButton].
   const FlutterFlowRadioButton({
     super.key,
     required this.options,
@@ -48,20 +50,49 @@ class FlutterFlowRadioButton extends StatefulWidget {
     this.verticalAlignment = WrapCrossAlignment.start,
   });
 
+  /// The list of options to choose from.
   final List<String> options;
+
+  /// A callback function that will be called when the selected option changes.
   final Function(String?)? onChanged;
+
+  /// A form field controller that manages the state of the selected option.
   final FormFieldController<String> controller;
+
+  /// The height of each option.
   final double optionHeight;
+
+  /// The width of each option. If not provided, the width will be determined automatically.
   final double? optionWidth;
+
+  /// The style of the option text.
   final TextStyle textStyle;
+
+  /// The style of the selected option text. If not provided, the [textStyle] will be used.
   final TextStyle? selectedTextStyle;
+
+  /// The padding around the option text.
   final EdgeInsetsGeometry textPadding;
+
+  /// The position of the radio button relative to the option text.
   final RadioButtonPosition buttonPosition;
+
+  /// The direction in which the options are laid out.
   final Axis direction;
+
+  /// The color of the radio button.
   final Color radioButtonColor;
+
+  /// The color of the radio button when it is not selected. If not provided, the [radioButtonColor] will be used.
   final Color? inactiveRadioButtonColor;
+
+  /// Whether the radio button can be toggled on and off.
   final bool toggleable;
+
+  /// The horizontal alignment of the options when the direction is horizontal.
   final WrapAlignment horizontalAlignment;
+
+  /// The vertical alignment of the options when the direction is vertical.
   final WrapCrossAlignment verticalAlignment;
 
   @override

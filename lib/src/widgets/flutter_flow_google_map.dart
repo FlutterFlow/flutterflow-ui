@@ -66,7 +66,9 @@ class FlutterFlowMarker {
   final Future Function()? onTap;
 }
 
+/// A widget that displays a Google Map.
 class FlutterFlowGoogleMap extends StatefulWidget {
+  /// Creates a [FlutterFlowGoogleMap] widget.
   const FlutterFlowGoogleMap({
     required this.controller,
     this.onCameraIdle,
@@ -88,22 +90,57 @@ class FlutterFlowGoogleMap extends StatefulWidget {
     super.key,
   });
 
+  /// A [Completer] that completes with a [GoogleMapController] instance.
   final Completer<GoogleMapController> controller;
+
+  /// An optional callback function that will be called when the camera movement
+  /// has ended and the map is idle.
   final Function(latlng.LatLng)? onCameraIdle;
+
+  /// The initial location to center the map on.
   final latlng.LatLng? initialLocation;
+
+  /// An iterable of [FlutterFlowMarker] objects that represent markers to be
+  /// displayed on the map.
   final Iterable<FlutterFlowMarker> markers;
+
+  /// The color of the markers.
   final GoogleMarkerColor markerColor;
+
+  /// A custom image to be used as the marker icon.
   final MarkerImage? markerImage;
+
+  /// The type of map to be displayed.
   final MapType mapType;
+
+  /// The style of the map.
   final GoogleMapStyle style;
+
+  /// The initial zoom level of the map.
   final double initialZoom;
+
+  /// Determines whether the user can interact with the map.
   final bool allowInteraction;
+
+  /// Determines whether the user can zoom in and out of the map.
   final bool allowZoom;
+
+  /// Determines whether to show zoom controls on the map.
   final bool showZoomControls;
+
+  /// Determines whether to show the user's current location on the map.
   final bool showLocation;
+
+  /// Determines whether to show a compass on the map.
   final bool showCompass;
+
+  /// Determines whether to show a toolbar with map-related actions.
   final bool showMapToolbar;
+
+  /// Determines whether to show traffic data on the map.
   final bool showTraffic;
+
+  /// Determines whether to center the map on the tapped marker.
   final bool centerMapOnMarkerTap;
 
   @override

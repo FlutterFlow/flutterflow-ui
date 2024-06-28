@@ -10,7 +10,17 @@ export 'package:flutter_credit_card/flutter_credit_card.dart'
 
 CreditCardModel emptyCreditCard() => CreditCardModel('', '', '', '', false);
 
+/// A form widget for entering credit card information.
 class FlutterFlowCreditCardForm extends StatefulWidget {
+  /// Creates a [FlutterFlowCreditCardForm].
+  ///
+  /// - [formKey] is a global key that uniquely identifies the form.
+  /// - [creditCardModel] is the model that holds the credit card information.
+  /// - [obscureNumber] determines whether the credit card number should be obscured.
+  /// - [obscureCvv] determines whether the CVV should be obscured.
+  /// - [textStyle] is the style of the text in the form.
+  /// - [spacing] is the spacing between form fields.
+  /// - [inputDecoration] is the decoration for the form fields.
   const FlutterFlowCreditCardForm({
     super.key,
     required this.formKey,
@@ -33,7 +43,7 @@ class FlutterFlowCreditCardForm extends StatefulWidget {
   final InputDecoration inputDecoration;
 
   @override
-  _FlutterFlowCreditCardFormState createState() =>
+  State<FlutterFlowCreditCardForm> createState() =>
       _FlutterFlowCreditCardFormState();
 }
 

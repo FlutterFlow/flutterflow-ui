@@ -2,6 +2,7 @@ import 'package:apivideo_live_stream/apivideo_live_stream.dart';
 import 'package:flutter/material.dart';
 import 'flutter_flow_widgets.dart';
 
+/// A widget that helps to create a live stream using the Mux API.
 class FlutterFlowMuxBroadcast extends StatefulWidget {
   const FlutterFlowMuxBroadcast({
     super.key,
@@ -31,29 +32,76 @@ class FlutterFlowMuxBroadcast extends StatefulWidget {
     required this.stopButtonIcon,
   });
 
+  /// Whether the camera is initialized or not.
   final bool isCameraInitialized;
+
+  /// Whether the video is currently being streamed or not.
   final bool isStreaming;
+
+  /// The duration of the video stream.
   final String? durationString;
+
+  /// The border radius of the widget.
   final BorderRadius borderRadius;
+
+  /// The controller for the live stream.
   final LiveStreamController? controller;
+
+  /// The configuration for the video stream.
   final VideoConfig videoConfig;
+
+  /// Callback function when the camera rotate button is tapped.
   final Function onCameraRotateButtonTap;
+
+  /// The text for the start button.
   final String startButtonText;
+
+  /// Callback function when the start button is tapped.
   final Function onStartButtonTap;
+
+  /// Callback function when the stop button is tapped.
   final Function onStopButtonTap;
+
+  /// The options for the start button.
   final FFButtonOptions startButtonOptions;
+
+  /// The icon for the start button.
   final Widget startButtonIcon;
+
+  /// The text for the live indicator.
   final String liveText;
+
+  /// The style for the live indicator text.
   final TextStyle liveTextStyle;
+
+  /// The icon for the live indicator.
   final Widget liveIcon;
+
+  /// The background color for the live indicator.
   final Color liveTextBackgroundColor;
+
+  /// The border radius for the live indicator container.
   final BorderRadius liveContainerBorderRadius;
+
+  /// The style for the duration text.
   final TextStyle durationTextStyle;
+
+  /// The background color for the duration text.
   final Color durationTextBackgroundColor;
+
+  /// The border radius for the duration text container.
   final BorderRadius durationContainerBorderRadius;
+
+  /// The icon for the rotate button.
   final Widget rotateButtonIcon;
+
+  /// The color for the rotate button.
   final Color rotateButtonColor;
+
+  /// The color for the stop button.
   final Color stopButtonColor;
+
+  /// The icon for the stop button.
   final Widget stopButtonIcon;
 
   @override

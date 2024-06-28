@@ -24,7 +24,53 @@ import 'package:flutterflow_ui/src/utils/flutter_flow_helpers.dart'
 
 export 'package:assets_audio_player/assets_audio_player.dart';
 
+/// A widget that displays an audio player with playback controls and a seek bar.
+///
+/// The [FlutterFlowAudioPlayer] widget is used to play audio files. It provides
+/// playback controls such as play/pause button, title, and playback duration.
+/// It also includes a seek bar to allow users to seek to a specific position
+/// in the audio file.
+///
+/// The [FlutterFlowAudioPlayer] requires an [Audio] object to specify the audio
+/// file to be played. It also accepts various customization options such as
+/// text styles, colors, elevation, and more.
+///
+/// Example usage:
+/// ```dart
+/// FlutterFlowAudioPlayer(
+///   audio: Audio(
+///     path: 'path/to/audio.mp3',
+///     audioType: AudioType.network,
+///   ),
+///   titleTextStyle: TextStyle(
+///     fontSize: 16,
+///     fontWeight: FontWeight.bold,
+///   ),
+///   playbackDurationTextStyle: TextStyle(
+///     fontSize: 14,
+///     color: Colors.grey,
+///   ),
+///   fillColor: Colors.white,
+///   playbackButtonColor: Colors.blue,
+///   activeTrackColor: Colors.blue,
+///   elevation: 4,
+///   pauseOnNavigate: true,
+///   playInBackground: PlayInBackground.enabled,
+/// )
+/// ```
 class FlutterFlowAudioPlayer extends StatefulWidget {
+  /// Creates a [FlutterFlowAudioPlayer] widget.
+  ///
+  /// - [audio] parameter is required and specifies the audio file to be played.
+  /// - [titleTextStyle] and [playbackDurationTextStyle] parameters are required
+  /// and define the text styles for the title and playback duration respectively.
+  /// - [fillColor], [playbackButtonColor], [activeTrackColor], and [inactiveTrackColor]
+  /// parameters are used to customize the colors of the audio player.
+  /// - [elevation] parameter specifies the elevation of the audio player.
+  /// - [pauseOnNavigate] parameter determines whether the audio should be paused
+  /// when navigating to a different screen.
+  /// - [playInBackground] parameter specifies whether the audio should continue
+  /// playing in the background when the app is not in the foreground.
   const FlutterFlowAudioPlayer({
     super.key,
     required this.audio,
@@ -171,7 +217,7 @@ class _FlutterFlowAudioPlayerState extends State<FlutterFlowAudioPlayer>
                               child: IconButton(
                                 onPressed: _assetsAudioPlayer!.playOrPause,
                                 icon: Icon(
-                                  (isPlaying)
+                                  isPlaying
                                       ? Icons.pause_circle_filled_rounded
                                       : Icons.play_circle_fill_rounded,
                                   color: widget.playbackButtonColor,
@@ -205,6 +251,7 @@ class _FlutterFlowAudioPlayerState extends State<FlutterFlowAudioPlayer>
               }));
 }
 
+/// Widget that represents the position seek bar in the audio player.
 class PositionSeekWidget extends StatefulWidget {
   const PositionSeekWidget({
     super.key,
@@ -215,10 +262,19 @@ class PositionSeekWidget extends StatefulWidget {
     this.inactiveTrackColor,
   });
 
+  /// The current position of the audio playback.
   final Duration currentPosition;
+
+  /// The total duration of the audio.
   final Duration duration;
+
+  /// Callback function to seek to a specific position in the audio.
   final Function(Duration) seekTo;
+
+  /// The color of the active track in the seek bar.
   final Color activeTrackColor;
+
+  /// The color of the inactive track in the seek bar.
   final Color? inactiveTrackColor;
 
   @override
@@ -228,6 +284,8 @@ class PositionSeekWidget extends StatefulWidget {
 class _PositionSeekWidgetState extends State<PositionSeekWidget> {
   late Duration _visibleValue;
   bool listenOnlyUserInteraction = false;
+
+  /// The percentage of the current position in relation to the total duration.
   double get percent => widget.duration.inMilliseconds == 0
       ? 0
       : _visibleValue.inMilliseconds / widget.duration.inMilliseconds;
@@ -275,6 +333,7 @@ class _PositionSeekWidgetState extends State<PositionSeekWidget> {
       );
 }
 
+/// Converts a [Duration] object to a formatted string in the format "mm:ss".
 String durationToString(Duration duration) {
   String twoDigits(int n) => (n >= 10) ? '$n' : '0$n';
 
@@ -285,6 +344,7 @@ String durationToString(Duration duration) {
   return '$twoDigitMinutes:$twoDigitSeconds';
 }
 
+/// Custom slider track shape for the audio player seek bar.
 class FlutterFlowRoundedRectSliderTrackShape extends SliderTrackShape
     with BaseSliderTrackShape {
   /// Create a slider track that draws two rectangles with rounded outer edges.
@@ -370,6 +430,7 @@ class FlutterFlowRoundedRectSliderTrackShape extends SliderTrackShape
   }
 }
 
+/// Generates a random alphanumeric string of length 8.
 String generateRandomAlphaNumericString() {
   const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
   return String.fromCharCodes(Iterable.generate(
@@ -377,5 +438,6 @@ String generateRandomAlphaNumericString() {
 }
 
 extension _AudioPlayerDurationExtensions on Duration {
+  /// Ensures that the duration is finite by returning [Duration.zero] if it is not.
   Duration get ensureFinite => inMicroseconds.isFinite ? this : Duration.zero;
 }

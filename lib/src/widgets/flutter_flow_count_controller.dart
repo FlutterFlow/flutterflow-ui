@@ -25,7 +25,7 @@ class FlutterFlowCountController extends StatefulWidget {
   final EdgeInsetsGeometry contentPadding;
 
   @override
-  _FlutterFlowCountControllerState createState() =>
+  State<FlutterFlowCountController> createState() =>
       _FlutterFlowCountControllerState();
 }
 

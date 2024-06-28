@@ -36,7 +36,9 @@ class FlutterFlowTimerController with ChangeNotifier {
   }
 }
 
+/// A timer widget that displays and manages time.
 class FlutterFlowTimer extends StatefulWidget {
+  /// Creates a [FlutterFlowTimer] widget.
   const FlutterFlowTimer({
     super.key,
     required this.initialTime,
@@ -49,13 +51,28 @@ class FlutterFlowTimer extends StatefulWidget {
     required this.style,
   });
 
+  /// The initial time for the timer.
   final int initialTime;
+
+  /// The controller for the timer.
   final FlutterFlowTimerController controller;
+
+  /// A function that returns the formatted display time.
   final String Function(int) getDisplayTime;
+
+  /// A callback function that is called when the timer value changes.
   final Function(int value, String displayTime, bool shouldUpdate) onChanged;
+
+  /// The interval at which the timer state should be updated.
   final Duration? updateStateInterval;
+
+  /// A callback function that is called when the timer ends.
   final Function()? onEnded;
+
+  /// The alignment of the timer text.
   final TextAlign textAlign;
+
+  /// The style of the timer text.
   final TextStyle style;
 
   @override

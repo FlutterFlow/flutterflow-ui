@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/src/utils/lat_lng.dart';
 import 'package:mapbox_search/mapbox_search.dart' as mapbox;
 
+/// A widget that displays a static map using the Mapbox API.
 class FlutterFlowStaticMap extends StatelessWidget {
   const FlutterFlowStaticMap({
     super.key,
@@ -21,18 +22,43 @@ class FlutterFlowStaticMap extends StatelessWidget {
     this.rotation = 0,
   });
 
+  /// The location to display on the map.
   final LatLng location;
+
+  /// The API key for accessing the Mapbox API.
   final String apiKey;
+
+  /// The style of the map.
   final mapbox.MapBoxStyle style;
+
+  /// The width of the map widget.
   final double width;
+
+  /// The height of the map widget.
   final double height;
+
+  /// How the map should be inscribed into the available space.
   final BoxFit? fit;
+
+  /// The border radius of the map widget.
   final BorderRadius borderRadius;
+
+  /// The color of the marker on the map.
   final Color? markerColor;
+
+  /// The URL of the custom marker icon.
   final String? markerUrl;
+
+  /// Whether to cache the map image.
   final bool cached;
+
+  /// The zoom level of the map.
   final int zoom;
+
+  /// The tilt angle of the map camera.
   final int tilt;
+
+  /// The rotation angle of the map camera.
   final int rotation;
 
   @override

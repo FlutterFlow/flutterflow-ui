@@ -1,8 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-
-import '../utils/form_field_controller.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/form_field_controller.dart';
+
+/// A dropdown widget that allows the user to select an option from a list of options.
 class FlutterFlowDropDown<T> extends StatefulWidget {
   const FlutterFlowDropDown({
     super.key,
@@ -48,35 +49,94 @@ class FlutterFlowDropDown<T> extends StatefulWidget {
                   onMultiSelectChanged == null),
         );
 
+  /// The controller for the dropdown field.
   final FormFieldController<T?>? controller;
+
+  /// The controller for the multi-select dropdown field.
   final FormFieldController<List<T>?>? multiSelectController;
+
+  /// The text to display as a hint when no option is selected.
   final String? hintText;
+
+  /// The text to display as a hint in the search field.
   final String? searchHintText;
+
+  /// The list of options to display in the dropdown.
   final List<T> options;
+
+  /// The list of labels corresponding to the options.
   final List<String>? optionLabels;
+
+  /// A callback function that is called when the selected option changes.
   final Function(T?)? onChanged;
+
+  /// A callback function that is called when the selected options change in multi-select mode.
   final Function(List<T>?)? onMultiSelectChanged;
+
+  /// The icon to display in the dropdown field.
   final Widget? icon;
+
+  /// The width of the dropdown field.
   final double? width;
+
+  /// The height of the dropdown field.
   final double? height;
+
+  /// The maximum height of the dropdown menu.
   final double? maxHeight;
+
+  /// The background color of the dropdown field.
   final Color? fillColor;
+
+  /// The text style for the search hint text.
   final TextStyle? searchHintTextStyle;
+
+  /// The text style for the search text.
   final TextStyle? searchTextStyle;
+
+  /// The color of the search cursor.
   final Color? searchCursorColor;
+
+  /// The text style for the dropdown field.
   final TextStyle textStyle;
+
+  /// The elevation of the dropdown menu.
   final double elevation;
+
+  /// The width of the dropdown field's border.
   final double borderWidth;
+
+  /// The border radius of the dropdown field.
   final double borderRadius;
+
+  /// The color of the dropdown field's border.
   final Color borderColor;
+
+  /// The margin around the dropdown field.
   final EdgeInsetsGeometry margin;
+
+  /// Whether to hide the underline of the dropdown field.
   final bool hidesUnderline;
+
+  /// Whether the dropdown is disabled.
   final bool disabled;
+
+  /// Whether the dropdown menu is displayed over the button.
   final bool isOverButton;
+
+  /// The offset of the dropdown menu.
   final Offset? menuOffset;
+
+  /// Whether the dropdown is searchable.
   final bool isSearchable;
+
+  /// Whether the dropdown is in multi-select mode.
   final bool isMultiSelect;
+
+  /// The label text for the dropdown field.
   final String? labelText;
+
+  /// The text style for the label text.
   final TextStyle? labelTextStyle;
 
   @override

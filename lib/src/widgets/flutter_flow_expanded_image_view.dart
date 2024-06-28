@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
+/// A widget that displays an expanded image view.
 class FlutterFlowExpandedImageView extends StatelessWidget {
+  /// Creates a [FlutterFlowExpandedImageView].
+  ///
+  /// - [image] parameter is required and represents the image to be displayed.
+  /// - [allowRotation] parameter determines whether rotation is allowed for the image.
+  /// - [useHeroAnimation] parameter determines whether to use a hero animation when transitioning to the expanded image view.
+  /// - [tag] parameter is an optional tag used for the hero animation.
   const FlutterFlowExpandedImageView({
+    super.key,
     required this.image,
     this.allowRotation = false,
     this.useHeroAnimation = true,
@@ -22,7 +30,7 @@ class FlutterFlowExpandedImageView extends StatelessWidget {
       child: SafeArea(
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               height: screenSize.height,
               width: screenSize.width,
               child: PhotoView.customChild(

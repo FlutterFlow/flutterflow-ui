@@ -7,20 +7,32 @@ import 'package:intl/intl.dart';
 export 'package:fl_chart/fl_chart.dart'
     show BarAreaData, FlDotData, LineChartBarData, BarChartAlignment;
 
+/// A line chart widget that displays a line chart with customizable data and styling.
+///
+/// The [FlutterFlowLineChart] widget is used to display a line chart in a Flutter application.
 class FlutterFlowLineChart extends StatelessWidget {
   const FlutterFlowLineChart({
-    Key? key,
+    super.key,
     required this.data,
     required this.xAxisLabelInfo,
     required this.yAxisLabelInfo,
     required this.axisBounds,
     this.chartStylingInfo = const ChartStylingInfo(),
-  }) : super(key: key);
+  });
 
+  /// The data to be displayed in the line chart.
   final List<FFLineChartData> data;
+
+  /// The information for labeling the x-axis.
   final AxisLabelInfo xAxisLabelInfo;
+
+  /// The information for labeling the y-axis.
   final AxisLabelInfo yAxisLabelInfo;
+
+  /// The bounds for the chart's axes.
   final AxisBounds axisBounds;
+
+  /// The styling information for the chart.
   final ChartStylingInfo chartStylingInfo;
 
   List<LineChartBarData> get dataWithSpots =>
@@ -58,9 +70,12 @@ class FlutterFlowLineChart extends StatelessWidget {
       );
 }
 
+/// A bar chart widget that displays data in a bar format.
+///
+/// The [FlutterFlowBarChart] widget is used to create a bar chart in FlutterFlow.
 class FlutterFlowBarChart extends StatelessWidget {
   const FlutterFlowBarChart({
-    Key? key,
+    super.key,
     required this.barData,
     required this.xLabels,
     required this.xAxisLabelInfo,
@@ -73,19 +88,42 @@ class FlutterFlowBarChart extends StatelessWidget {
     this.groupSpace,
     this.alignment = BarChartAlignment.center,
     this.chartStylingInfo = const ChartStylingInfo(),
-  }) : super(key: key);
+  });
 
+  /// The data for the bar chart.
   final List<FFBarChartData> barData;
+
+  /// The labels for the x-axis of the bar chart.
   final List<String> xLabels;
+
+  /// The information about the labels for the x-axis.
   final AxisLabelInfo xAxisLabelInfo;
+
+  /// The information about the labels for the y-axis.
   final AxisLabelInfo yAxisLabelInfo;
+
+  /// The bounds for the x and y axes.
   final AxisBounds axisBounds;
+
+  /// Determines whether the bars in the chart are stacked.
   final bool stacked;
+
+  /// The width of each bar in the chart.
   final double? barWidth;
+
+  /// The border radius of each bar in the chart.
   final BorderRadius? barBorderRadius;
+
+  /// The space between each bar in the chart.
   final double? barSpace;
+
+  /// The space between each group of bars in the chart.
   final double? groupSpace;
+
+  /// The alignment of the bars within the chart.
   final BarChartAlignment alignment;
+
+  /// The styling information for the chart.
   final ChartStylingInfo chartStylingInfo;
 
   Map<int, List<double>> get dataMap => xLabels.asMap().map((key, value) =>
@@ -191,16 +229,17 @@ enum PieChartSectionLabelType {
   percent,
 }
 
+/// A widget that displays a pie chart using the provided data.
 class FlutterFlowPieChart extends StatelessWidget {
   const FlutterFlowPieChart({
-    Key? key,
+    super.key,
     required this.data,
     this.donutHoleRadius = 0,
     this.donutHoleColor = Colors.transparent,
     this.sectionLabelType = PieChartSectionLabelType.none,
     this.sectionLabelStyle,
     this.labelFormatter = const LabelFormatter(),
-  }) : super(key: key);
+  });
 
   final FFPieChartData data;
   final double donutHoleRadius;
@@ -263,7 +302,7 @@ class FlutterFlowPieChart extends StatelessWidget {
 
 class FlutterFlowChartLegendWidget extends StatelessWidget {
   const FlutterFlowChartLegendWidget({
-    Key? key,
+    super.key,
     required this.entries,
     this.width,
     this.height,
@@ -276,7 +315,7 @@ class FlutterFlowChartLegendWidget extends StatelessWidget {
     this.indicatorSize = 10,
     this.indicatorBorderRadius,
     this.textPadding = const EdgeInsets.all(0),
-  }) : super(key: key);
+  });
 
   final List<LegendEntry> entries;
   final double? width;

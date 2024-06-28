@@ -3,7 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutterflow_ui/src/utils/form_field_controller.dart';
 
+/// A group of checkboxes that allows the user to select multiple options.
 class FlutterFlowCheckboxGroup extends StatefulWidget {
+  /// Creates a [FlutterFlowCheckboxGroup].
+  ///
+  /// - [options] parameter is a list of strings representing the available options.
+  /// - [onChanged] parameter is a callback function that is called when the selection changes.
+  /// - [controller] parameter is a controller for the form field that holds the selected options.
+  /// - [textStyle] parameter is the style of the text for the checkboxes.
+  /// - [labelPadding] parameter is the padding around the checkbox labels.
+  /// - [itemPadding] parameter is the padding around each checkbox item.
+  /// - [activeColor] parameter is the color of the checkbox when it is selected.
+  /// - [checkColor] parameter is the color of the check mark inside the checkbox.
+  /// - [checkboxBorderRadius] parameter is the border radius of the checkbox.
+  /// - [checkboxBorderColor] parameter is the color of the checkbox border.
+  /// - [initialized] parameter indicates whether the checkbox group is initialized with a value.
+  /// - [unselectedTextStyle] parameter is the style of the text for unselected checkboxes.
   const FlutterFlowCheckboxGroup({
     super.key,
     required this.options,

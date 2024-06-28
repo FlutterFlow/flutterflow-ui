@@ -5,24 +5,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+/// A widget that displays a banner ad.
 class FlutterFlowAdBanner extends StatefulWidget {
   const FlutterFlowAdBanner({
-    Key? key,
+    super.key,
     this.width,
     this.height,
     required this.showsTestAd,
     this.iOSAdUnitID,
     this.androidAdUnitID,
-  }) : super(key: key);
+  });
 
+  /// The width of the ad banner.
   final double? width;
+
+  /// The height of the ad banner.
   final double? height;
+
+  /// Whether to show a test ad.
   final bool showsTestAd;
+
+  /// The Ad Unit ID for iOS.
   final String? iOSAdUnitID;
+
+  /// The Ad Unit ID for Android.
   final String? androidAdUnitID;
 
   @override
-  _FlutterFlowAdBannerState createState() => _FlutterFlowAdBannerState();
+  State<FlutterFlowAdBanner> createState() => _FlutterFlowAdBannerState();
 }
 
 class _FlutterFlowAdBannerState extends State<FlutterFlowAdBanner> {
@@ -84,6 +94,7 @@ class _FlutterFlowAdBannerState extends State<FlutterFlowAdBanner> {
           );
   }
 
+  /// Creates an anchored banner ad.
   Future _createAnchoredBanner(BuildContext context) async {
     final AdSize? size = widget.width != null && widget.height != null
         ? AdSize(

@@ -3,7 +3,25 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
+/// A widget that displays a stack of swipeable cards.
 class FlutterFlowSwipeableStack extends StatefulWidget {
+  /// Creates a [FlutterFlowSwipeableStack].
+  ///
+  /// - [itemBuilder] is a callback that builds the widget for each card in the stack.
+  /// - [itemCount] is the total number of cards in the stack.
+  /// - [controller] is the controller for the swipeable stack.
+  /// - [onSwipeFn] is a callback that is called when a card is swiped.
+  /// - [onRightSwipe] is a callback that is called when a card is swiped to the right.
+  /// - [onLeftSwipe] is a callback that is called when a card is swiped to the left.
+  /// - [onUpSwipe] is a callback that is called when a card is swiped up.
+  /// - [onDownSwipe] is a callback that is called when a card is swiped down.
+  /// - [loop] determines whether the stack should loop back to the beginning when the last card is swiped.
+  /// - [cardDisplayCount] is the number of cards to display on the stack at a time.
+  /// - [scale] is the scale factor for the cards in the stack.
+  /// - [maxAngle] is the maximum rotation angle for the cards in the stack.
+  /// - [threshold] is the swipe threshold for the cards in the stack.
+  /// - [cardPadding] is the padding for each card in the stack.
+  /// - [backCardOffset] is the offset for the back card in the stack.
   const FlutterFlowSwipeableStack({
     super.key,
     required this.itemBuilder,
@@ -40,7 +58,7 @@ class FlutterFlowSwipeableStack extends StatefulWidget {
   final Offset? backCardOffset;
 
   @override
-  _FFSwipeableStackState createState() => _FFSwipeableStackState();
+  State<FlutterFlowSwipeableStack> createState() => _FFSwipeableStackState();
 }
 
 class _FFSwipeableStackState extends State<FlutterFlowSwipeableStack> {
