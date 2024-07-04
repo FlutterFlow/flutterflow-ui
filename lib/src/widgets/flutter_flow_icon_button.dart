@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+/// A customizable icon button widget.
 class FlutterFlowIconButton extends StatefulWidget {
+  /// Creates a [FlutterFlowIconButton].
+  ///
+  /// - [icon] parameter is required and specifies the widget to be used as the icon.
+  /// - [borderRadius] parameter specifies the border radius of the button.
+  /// - [buttonSize] parameter specifies the size of the button.
+  /// - [fillColor] parameter specifies the fill color of the button.
+  /// - [disabledColor] parameter specifies the color of the button when it is disabled.
+  /// - [disabledIconColor] parameter specifies the color of the icon when the button is disabled.
+  /// - [hoverColor] parameter specifies the color of the button when it is hovered.
+  /// - [hoverIconColor] parameter specifies the color of the icon when the button is hovered.
+  /// - [borderColor] parameter specifies the border color of the button.
+  /// - [borderWidth] parameter specifies the width of the button's border.
+  /// - [showLoadingIndicator] parameter specifies whether to show a loading indicator on the button.
+  /// - [onPressed] parameter specifies the callback function to be called when the button is pressed.
   const FlutterFlowIconButton({
-    Key? key,
+    super.key,
     required this.icon,
     this.borderColor,
     this.borderRadius,
@@ -16,7 +31,7 @@ class FlutterFlowIconButton extends StatefulWidget {
     this.hoverIconColor,
     this.onPressed,
     this.showLoadingIndicator = false,
-  }) : super(key: key);
+  });
 
   final Widget icon;
   final double? borderRadius;
@@ -115,13 +130,22 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
           return widget.fillColor;
         },
       ),
+      overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(MaterialState.pressed)) {
+          return null;
+        }
+        return widget.hoverColor == null ? null : Colors.transparent;
+      }),
     );
 
     return SizedBox(
       width: widget.buttonSize,
       height: widget.buttonSize,
       child: Theme(
-        data: Theme.of(context).copyWith(useMaterial3: true),
+        data: ThemeData.from(
+          colorScheme: Theme.of(context).colorScheme,
+          useMaterial3: true,
+        ),
         child: IgnorePointer(
           ignoring: (widget.showLoadingIndicator && loading),
           child: IconButton(

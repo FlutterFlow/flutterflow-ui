@@ -25,11 +25,14 @@
  * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import 'form_field_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/src/utils/form_field_controller.dart';
 
+/// A custom radio button widget that allows the user to select a single option from a list of options.
 class FlutterFlowRadioButton extends StatefulWidget {
+  /// Creates a [FlutterFlowRadioButton].
   const FlutterFlowRadioButton({
+    super.key,
     required this.options,
     required this.onChanged,
     required this.controller,
@@ -47,20 +50,49 @@ class FlutterFlowRadioButton extends StatefulWidget {
     this.verticalAlignment = WrapCrossAlignment.start,
   });
 
+  /// The list of options to choose from.
   final List<String> options;
+
+  /// A callback function that will be called when the selected option changes.
   final Function(String?)? onChanged;
+
+  /// A form field controller that manages the state of the selected option.
   final FormFieldController<String> controller;
+
+  /// The height of each option.
   final double optionHeight;
+
+  /// The width of each option. If not provided, the width will be determined automatically.
   final double? optionWidth;
+
+  /// The style of the option text.
   final TextStyle textStyle;
+
+  /// The style of the selected option text. If not provided, the [textStyle] will be used.
   final TextStyle? selectedTextStyle;
+
+  /// The padding around the option text.
   final EdgeInsetsGeometry textPadding;
+
+  /// The position of the radio button relative to the option text.
   final RadioButtonPosition buttonPosition;
+
+  /// The direction in which the options are laid out.
   final Axis direction;
+
+  /// The color of the radio button.
   final Color radioButtonColor;
+
+  /// The color of the radio button when it is not selected. If not provided, the [radioButtonColor] will be used.
   final Color? inactiveRadioButtonColor;
+
+  /// Whether the radio button can be toggled on and off.
   final bool toggleable;
+
+  /// The horizontal alignment of the options when the direction is horizontal.
   final WrapAlignment horizontalAlignment;
+
+  /// The vertical alignment of the options when the direction is vertical.
   final WrapCrossAlignment verticalAlignment;
 
   @override
@@ -68,24 +100,44 @@ class FlutterFlowRadioButton extends StatefulWidget {
 }
 
 class _FlutterFlowRadioButtonState extends State<FlutterFlowRadioButton> {
-  void Function()? get listener => widget.onChanged != null
-      ? () => widget.onChanged!(widget.controller.value)
-      : null;
+  bool get enabled => widget.onChanged != null;
+  FormFieldController<String> get controller => widget.controller;
+  void Function()? _listener;
 
   @override
   void initState() {
-    if (listener != null) {
-      widget.controller.addListener(listener!);
-    }
     super.initState();
+    _maybeSetOnChangedListener();
   }
 
   @override
   void dispose() {
-    if (listener != null) {
-      widget.controller.removeListener(listener!);
-    }
+    _maybeRemoveOnChangedListener();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(FlutterFlowRadioButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final oldWidgetEnabled = oldWidget.onChanged != null;
+    if (oldWidgetEnabled != enabled) {
+      _maybeRemoveOnChangedListener();
+      _maybeSetOnChangedListener();
+    }
+  }
+
+  void _maybeSetOnChangedListener() {
+    if (enabled) {
+      _listener = () => widget.onChanged!(controller.value);
+      controller.addListener(_listener!);
+    }
+  }
+
+  void _maybeRemoveOnChangedListener() {
+    if (_listener != null) {
+      controller.removeListener(_listener!);
+      _listener = null;
+    }
   }
 
   List<String> get effectiveOptions =>
@@ -98,8 +150,8 @@ class _FlutterFlowRadioButtonState extends State<FlutterFlowRadioButton> {
           .copyWith(unselectedWidgetColor: widget.inactiveRadioButtonColor),
       child: RadioGroup<String>.builder(
         direction: widget.direction,
-        groupValue: widget.controller.value,
-        onChanged: (value) => widget.controller.value = value,
+        groupValue: controller.value,
+        onChanged: enabled ? (value) => controller.value = value : null,
         activeColor: widget.radioButtonColor,
         toggleable: widget.toggleable,
         textStyle: widget.textStyle,
@@ -134,6 +186,7 @@ class RadioButtonBuilder<T> {
 
 class RadioButton<T> extends StatelessWidget {
   const RadioButton({
+    super.key,
     required this.description,
     required this.value,
     required this.groupValue,
@@ -174,7 +227,7 @@ class RadioButton<T> extends StatelessWidget {
       radioButtonText = Flexible(child: radioButtonText);
     }
     return InkWell(
-      onTap: () => onChanged!(value),
+      onTap: onChanged != null ? () => onChanged!(value) : null,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -195,6 +248,7 @@ class RadioButton<T> extends StatelessWidget {
 
 class RadioGroup<T> extends StatelessWidget {
   const RadioGroup.builder({
+    super.key,
     required this.groupValue,
     required this.onChanged,
     required this.items,
@@ -229,7 +283,7 @@ class RadioGroup<T> extends StatelessWidget {
   List<Widget> get _group => items.map(
         (item) {
           final radioButtonBuilder = itemBuilder(item);
-          return Container(
+          return SizedBox(
             height: optionHeight,
             width: optionWidth,
             child: RadioButton(

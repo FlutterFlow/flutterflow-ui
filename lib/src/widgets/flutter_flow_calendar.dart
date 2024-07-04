@@ -12,28 +12,60 @@ extension DateTimeExtension on DateTime {
   DateTime get endOfDay => DateTime(year, month, day, 23, 59);
 }
 
-bool isSameDay(DateTime? a, DateTime? b) {
-  if (a == null || b == null) {
-    return false;
-  }
-  return a.year == b.year && a.month == b.month && a.day == b.day;
-}
-
-bool isSameMonth(DateTime? a, DateTime? b) {
-  if (a == null || b == null) {
-    return false;
-  }
-  return a.year == b.year && a.month == b.month;
-}
-
+/// A customizable calendar widget for FlutterFlow.
+///
+/// The `FlutterFlowCalendar` widget allows you to display a calendar with various customization options.
+/// You can customize the color, date format, starting day of the week, header style, and more.
+///
+/// To use this widget, simply create an instance of `FlutterFlowCalendar` and pass in the desired parameters.
+/// You can also provide a callback function to handle changes in the selected date range.
+///
+/// Example usage:
+/// ```dart
+/// FlutterFlowCalendar(
+///   color: Colors.blue,
+///   onChange: (DateTimeRange? selectedRange) {
+///     // Handle selected date range change
+///   },
+///   initialDate: DateTime.now(),
+///   weekFormat: true,
+///   weekStartsMonday: true,
+///   twoRowHeader: true,
+///   iconColor: Colors.white,
+///   dateStyle: TextStyle(fontSize: 16),
+///   dayOfWeekStyle: TextStyle(fontWeight: FontWeight.bold),
+///   inactiveDateStyle: TextStyle(color: Colors.grey),
+///   selectedDateStyle: TextStyle(color: Colors.red),
+///   titleStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+///   rowHeight: 40,
+///   locale: 'en_US',
+/// )
+/// ```
 class FlutterFlowCalendar extends StatefulWidget {
+  /// Creates a new instance of [FlutterFlowCalendar].
+  ///
+  /// - `color` parameter specifies the background color of the calendar.
+  /// - `onChange` parameter is a callback function that will be called when the selected date range changes.
+  /// - `initialDate` parameter specifies the initial date to be displayed on the calendar.
+  /// - `weekFormat` parameter determines whether the calendar should be displayed in week format.
+  /// - `weekStartsMonday` parameter determines whether the week starts on Monday.
+  /// - `twoRowHeader` parameter determines whether the header should be displayed in two rows.
+  /// - `iconColor` parameter specifies the color of the icons used in the calendar.
+  /// - `dateStyle` parameter specifies the text style for the dates.
+  /// - `dayOfWeekStyle` parameter specifies the text style for the day of the week labels.
+  /// - `inactiveDateStyle` parameter specifies the text style for inactive dates.
+  /// - `selectedDateStyle` parameter specifies the text style for selected dates.
+  /// - `titleStyle` parameter specifies the text style for the calendar title.
+  /// - `rowHeight` parameter specifies the height of each row in the calendar.
+  /// - `locale` parameter specifies the locale to be used for formatting dates.
   const FlutterFlowCalendar({
-    Key? key,
+    super.key,
     required this.color,
     this.onChange,
     this.initialDate,
     this.weekFormat = false,
     this.weekStartsMonday = false,
+    this.twoRowHeader = false,
     this.iconColor,
     this.dateStyle,
     this.dayOfWeekStyle,
@@ -42,24 +74,52 @@ class FlutterFlowCalendar extends StatefulWidget {
     this.titleStyle,
     this.rowHeight,
     this.locale,
-  }) : super(key: key);
+  });
 
+  /// Determines whether the calendar should be displayed in week format.
   final bool weekFormat;
+
+  /// Determines whether the week starts on Monday.
   final bool weekStartsMonday;
+
+  /// Determines whether the header should have two rows.
+  final bool twoRowHeader;
+
+  /// The color of the calendar.
   final Color color;
+
+  /// A callback function that is called when the selected date range changes.
   final void Function(DateTimeRange?)? onChange;
+
+  /// The initial date to be displayed on the calendar.
   final DateTime? initialDate;
+
+  /// The color of the icons in the calendar.
   final Color? iconColor;
+
+  /// The text style for the dates displayed on the calendar.
   final TextStyle? dateStyle;
+
+  /// The text style for the day of the week displayed on the calendar.
   final TextStyle? dayOfWeekStyle;
+
+  /// The text style for the inactive dates on the calendar.
   final TextStyle? inactiveDateStyle;
+
+  /// The text style for the selected dates on the calendar.
   final TextStyle? selectedDateStyle;
+
+  /// The text style for the title of the calendar.
   final TextStyle? titleStyle;
+
+  /// The height of each row in the calendar.
   final double? rowHeight;
+
+  /// The locale to be used for formatting dates.
   final String? locale;
 
   @override
-  State<StatefulWidget> createState() => _FlutterFlowCalendarState();
+  State<FlutterFlowCalendar> createState() => _FlutterFlowCalendarState();
 }
 
 class _FlutterFlowCalendarState extends State<FlutterFlowCalendar> {
@@ -134,6 +194,7 @@ class _FlutterFlowCalendarState extends State<FlutterFlowCalendar> {
             titleStyle: widget.titleStyle,
             iconColor: widget.iconColor,
             locale: widget.locale,
+            twoRowHeader: widget.twoRowHeader,
           ),
           TableCalendar(
             focusedDay: focusedDay,
@@ -143,9 +204,10 @@ class _FlutterFlowCalendarState extends State<FlutterFlowCalendar> {
             calendarFormat: calendarFormat,
             headerVisible: false,
             locale: widget.locale,
-            rowHeight:
-                widget.rowHeight ?? MediaQuery.of(context).size.width / 7,
+            rowHeight: widget.rowHeight ?? MediaQuery.sizeOf(context).width / 7,
             calendarStyle: CalendarStyle(
+              defaultTextStyle:
+                  widget.dateStyle ?? const TextStyle(color: Color(0xFF5A5A5A)),
               weekendTextStyle: widget.dateStyle ??
                   const TextStyle(color: const Color(0xFF5A5A5A)),
               holidayTextStyle: widget.dateStyle ??
@@ -181,11 +243,16 @@ class _FlutterFlowCalendarState extends State<FlutterFlowCalendar> {
               weekendStyle: const TextStyle(color: Color(0xFF616161))
                   .merge(widget.dayOfWeekStyle),
             ),
-            onDaySelected: (newSelectedDay, _) {
+            onPageChanged: (focused) {
+              if (focusedDay.startOfDay != focused.startOfDay) {
+                setState(() => focusedDay = focused);
+              }
+            },
+            onDaySelected: (newSelectedDay, focused) {
               if (!isSameDay(selectedDay, newSelectedDay)) {
                 setSelectedDay(newSelectedDay);
-                if (!isSameMonth(focusedDay, newSelectedDay)) {
-                  setState(() => focusedDay = newSelectedDay);
+                if (focusedDay.startOfDay != focused.startOfDay) {
+                  setState(() => focusedDay = focused);
                 }
               }
             },
@@ -196,7 +263,7 @@ class _FlutterFlowCalendarState extends State<FlutterFlowCalendar> {
 
 class CalendarHeader extends StatelessWidget {
   const CalendarHeader({
-    Key? key,
+    super.key,
     required this.focusedDay,
     required this.onLeftChevronTap,
     required this.onRightChevronTap,
@@ -204,7 +271,8 @@ class CalendarHeader extends StatelessWidget {
     this.iconColor,
     this.titleStyle,
     this.locale,
-  }) : super(key: key);
+    this.twoRowHeader = false,
+  });
 
   final DateTime focusedDay;
   final VoidCallback onLeftChevronTap;
@@ -213,49 +281,73 @@ class CalendarHeader extends StatelessWidget {
   final Color? iconColor;
   final TextStyle? titleStyle;
   final String? locale;
+  final bool twoRowHeader;
 
   @override
   Widget build(BuildContext context) => Container(
         decoration: const BoxDecoration(),
         margin: const EdgeInsets.all(0),
         padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            const SizedBox(
-              width: 20,
-            ),
-            Expanded(
-              child: Text(
-                DateFormat.yMMMM(locale).format(focusedDay),
-                style: const TextStyle(fontSize: 17).merge(titleStyle),
-              ),
-            ),
-            CustomIconButton(
-              icon: Icon(Icons.calendar_today, color: iconColor),
-              onTap: onTodayButtonTap,
-            ),
-            CustomIconButton(
-              icon: Icon(Icons.chevron_left, color: iconColor),
-              onTap: onLeftChevronTap,
-            ),
-            CustomIconButton(
-              icon: Icon(Icons.chevron_right, color: iconColor),
-              onTap: onRightChevronTap,
-            ),
-          ],
+        child: twoRowHeader ? _buildTwoRowHeader() : _buildOneRowHeader(),
+      );
+
+  Widget _buildTwoRowHeader() => Column(
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              const SizedBox(width: 16),
+              _buildDateWidget(),
+            ],
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: _buildCustomIconButtons(),
+          ),
+        ],
+      );
+
+  Widget _buildOneRowHeader() => Row(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          const SizedBox(width: 16),
+          _buildDateWidget(),
+          ..._buildCustomIconButtons(),
+        ],
+      );
+
+  Widget _buildDateWidget() => Expanded(
+        child: Text(
+          DateFormat.yMMMM(locale).format(focusedDay),
+          style: const TextStyle(fontSize: 17).merge(titleStyle),
         ),
       );
+
+  List<Widget> _buildCustomIconButtons() => <Widget>[
+        CustomIconButton(
+          icon: Icon(Icons.calendar_today, color: iconColor),
+          onTap: onTodayButtonTap,
+        ),
+        CustomIconButton(
+          icon: Icon(Icons.chevron_left, color: iconColor),
+          onTap: onLeftChevronTap,
+        ),
+        CustomIconButton(
+          icon: Icon(Icons.chevron_right, color: iconColor),
+          onTap: onRightChevronTap,
+        ),
+      ];
 }
 
 class CustomIconButton extends StatelessWidget {
   const CustomIconButton({
-    Key? key,
+    super.key,
     required this.icon,
     required this.onTap,
     this.margin = const EdgeInsets.symmetric(horizontal: 4),
     this.padding = const EdgeInsets.all(10),
-  }) : super(key: key);
+  });
 
   final Icon icon;
   final VoidCallback onTap;

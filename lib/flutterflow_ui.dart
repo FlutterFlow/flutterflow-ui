@@ -1,4 +1,4 @@
 library flutterflow_ui;
 
-export 'src/flutter_flow/flutter_flow.dart';
-export 'src/flutter_flow/random_data_util.dart';
+export 'src/utils/flutter_flow_utils.dart';
+export 'src/widgets/flutter_flow_widgets.dart';

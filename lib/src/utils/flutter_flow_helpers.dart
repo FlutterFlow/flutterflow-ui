@@ -7,14 +7,16 @@ import 'package:intl/intl.dart';
 import 'package:json_path/json_path.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-export 'lat_lng.dart';
-export 'place.dart';
-export 'flutter_flow_model.dart';
+export 'dart:convert' show jsonEncode, jsonDecode;
 export 'dart:math' show min, max;
 export 'dart:typed_data' show Uint8List;
-export 'dart:convert' show jsonEncode, jsonDecode;
+
 export 'package:intl/intl.dart';
 export 'package:page_transition/page_transition.dart';
+
+export 'flutter_flow_model.dart';
+export 'lat_lng.dart';
+export 'place.dart';
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<PageRoute>();
 

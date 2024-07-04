@@ -28,7 +28,7 @@ import 'package:flutter/material.dart';
 
 class FlutterFlowLanguageSelector extends StatelessWidget {
   const FlutterFlowLanguageSelector({
-    Key? key,
+    super.key,
     required this.currentLanguage,
     required this.languages,
     required this.onChanged,
@@ -44,7 +44,7 @@ class FlutterFlowLanguageSelector extends StatelessWidget {
     this.dropdownColor,
     this.dropdownIconColor = const Color(0xFF14181B),
     this.dropdownIcon,
-  }) : super(key: key);
+  });
 
   final double? width;
   final double? height;
@@ -63,7 +63,7 @@ class FlutterFlowLanguageSelector extends StatelessWidget {
   final IconData? dropdownIcon;
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
         width: width,
         height: height,
         child: _LanguagePickerDropdown(
@@ -90,14 +90,13 @@ class FlutterFlowLanguageSelector extends StatelessWidget {
 
 class _LanguagePickerItem extends StatelessWidget {
   const _LanguagePickerItem({
-    Key? key,
     required this.language,
     required this.languages,
     this.textStyle,
     this.hideFlags = false,
     this.flagSize = 24.0,
     this.flagTextGap = 8.0,
-  }) : super(key: key);
+  });
 
   final String language;
   final List<String> languages;
@@ -112,11 +111,11 @@ class _LanguagePickerItem extends StatelessWidget {
     Widget flagWidget = Container();
     if (flagInfo is String) {
       final flagEmoji = EmojiConverter.fromAlpha2CountryCode(flagInfo);
-      flagWidget = Text(
-        flagEmoji,
-        style: const TextStyle(
-          fontSize: 20.0,
-          height: 1.5,
+      flagWidget = Padding(
+        padding: const EdgeInsets.only(bottom: 2.0),
+        child: Text(
+          flagEmoji,
+          style: const TextStyle(fontSize: 20.0),
         ),
       );
     } else if (flagInfo is Map) {
@@ -384,7 +383,7 @@ final List<Map<String, String>> _defaultLanguagesList = [
   {"isoCode": "pi", "name": "पाऴि"},
   {"isoCode": "pa", "name": "ਪੰਜਾਬੀ"},
   {"isoCode": "fa", "name": "فارسی"},
-  {"isoCode": "pl", "name": "polszczyzna"},
+  {"isoCode": "pl", "name": "Polski"},
   {"isoCode": "pt", "name": "Português"},
   {"isoCode": "ps", "name": "پښتو"},
   {"isoCode": "qu", "name": "Runa Simi, Kichwa"},
@@ -492,6 +491,7 @@ final Map<String, dynamic> languageToCountryInfo = {
   "fr": "fr",
   "gaa": "gh",
   "ka": "ge",
+  "kl": "gl",
   "de": "de",
   "el": "gr",
   "gu": "in",

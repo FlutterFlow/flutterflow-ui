@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+// ignore: implementation_imports
+import 'package:flutter_credit_card/src/masked_text_controller.dart';
 
 export 'package:flutter_credit_card/flutter_credit_card.dart'
     show CreditCardModel;
@@ -8,9 +10,19 @@ export 'package:flutter_credit_card/flutter_credit_card.dart'
 
 CreditCardModel emptyCreditCard() => CreditCardModel('', '', '', '', false);
 
+/// A form widget for entering credit card information.
 class FlutterFlowCreditCardForm extends StatefulWidget {
+  /// Creates a [FlutterFlowCreditCardForm].
+  ///
+  /// - [formKey] is a global key that uniquely identifies the form.
+  /// - [creditCardModel] is the model that holds the credit card information.
+  /// - [obscureNumber] determines whether the credit card number should be obscured.
+  /// - [obscureCvv] determines whether the CVV should be obscured.
+  /// - [textStyle] is the style of the text in the form.
+  /// - [spacing] is the spacing between form fields.
+  /// - [inputDecoration] is the decoration for the form fields.
   const FlutterFlowCreditCardForm({
-    Key? key,
+    super.key,
     required this.formKey,
     required this.creditCardModel,
     this.obscureNumber = false,
@@ -20,7 +32,7 @@ class FlutterFlowCreditCardForm extends StatefulWidget {
     this.inputDecoration = const InputDecoration(
       border: OutlineInputBorder(),
     ),
-  }) : super(key: key);
+  });
 
   final GlobalKey<FormState> formKey;
   final CreditCardModel creditCardModel;
@@ -31,12 +43,12 @@ class FlutterFlowCreditCardForm extends StatefulWidget {
   final InputDecoration inputDecoration;
 
   @override
-  _FlutterFlowCreditCardFormState createState() =>
+  State<FlutterFlowCreditCardForm> createState() =>
       _FlutterFlowCreditCardFormState();
 }
 
 class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
-  final MaskedTextController _cardNumberController =
+  final TextEditingController _cardNumberController =
       MaskedTextController(mask: '0000 0000 0000 0000');
   final TextEditingController _expiryDateController =
       MaskedTextController(mask: '00/00');
@@ -141,7 +153,7 @@ class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
                         final DateTime now = DateTime.now();
                         final List<String> date = value.split(RegExp(r'/'));
                         final int month = int.parse(date.first);
-                        final int year = int.parse('20${date.last}');
+                        final int year = int.parse('20\${date.last}');
                         final DateTime cardDate = DateTime(year, month);
 
                         if (cardDate.isBefore(now) ||
@@ -230,7 +242,7 @@ class _FlutterFlowCreditCardFormState extends State<FlutterFlowCreditCardForm> {
       (type, patterns) {
         for (final patternRange in patterns) {
           // Remove any spaces
-          String ccPatternStr = cardNumber.replaceAll(RegExp(r's+|s'), '');
+          String ccPatternStr = cardNumber.replaceAll(RegExp(r's+\b|\bs'), '');
           final int rangeLen = patternRange[0].length;
           // Trim the Credit Card number string to match the pattern prefix length
           if (rangeLen < cardNumber.length) {
