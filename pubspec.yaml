@@ -10,7 +10,7 @@ environment:
 dependencies:
   aligned_dialog: ^0.0.6
   aligned_tooltip: ^0.0.1
-  apivideo_live_stream: ^1.0.7
+  apivideo_live_stream: 1.0.7
   assets_audio_player: ^3.1.1
   assets_audio_player_web: ^3.1.1
   auto_size_text: ^3.0.0
