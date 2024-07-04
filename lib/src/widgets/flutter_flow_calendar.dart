@@ -209,9 +209,9 @@ class _FlutterFlowCalendarState extends State<FlutterFlowCalendar> {
               defaultTextStyle:
                   widget.dateStyle ?? const TextStyle(color: Color(0xFF5A5A5A)),
               weekendTextStyle: widget.dateStyle ??
-                  const TextStyle(color: const Color(0xFF5A5A5A)),
+                  const TextStyle(color: Color(0xFF5A5A5A)),
               holidayTextStyle: widget.dateStyle ??
-                  const TextStyle(color: const Color(0xFF5C6BC0)),
+                  const TextStyle(color: Color(0xFF5C6BC0)),
               selectedTextStyle:
                   const TextStyle(color: Color(0xFFFAFAFA), fontSize: 16.0)
                       .merge(widget.selectedDateStyle),

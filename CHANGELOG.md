@@ -1,3 +1,7 @@
+## 0.3.1
+
+- Remove audio player support from the package
+
 ## 0.3.0
 
 - Add support for new UI widgets available in current FlutterFlow release

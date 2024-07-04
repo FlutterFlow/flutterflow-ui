@@ -330,8 +330,8 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
       .toList();
 
   Widget _buildDropdown() {
-    final overlayColor = MaterialStateProperty.resolveWith<Color?>((states) =>
-        states.contains(MaterialState.focused) ? Colors.transparent : null);
+    final overlayColor = WidgetStateProperty.resolveWith<Color?>((states) =>
+        states.contains(WidgetState.focused) ? Colors.transparent : null);
     final iconStyleData = widget.icon != null
         ? IconStyleData(icon: widget.icon!)
         : const IconStyleData();

@@ -128,7 +128,7 @@ class _LanguagePickerItem extends StatelessWidget {
     }
     flagWidget = Transform.scale(
       scale: flagSize / 24.0,
-      child: Container(
+      child: SizedBox(
         width: 24,
         child: flagWidget,
       ),

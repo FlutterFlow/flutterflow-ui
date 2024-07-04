@@ -543,8 +543,8 @@ FlTitlesData getTitlesData(
             ? xAxisLabelInfo.titleTextStyle!.fontSize! + 12
             : 16,
         sideTitles: SideTitles(
-          getTitlesWidget: (val, _) => getXTitlesWidget != null
-              ? getXTitlesWidget(val, _)
+          getTitlesWidget: (val, meta) => getXTitlesWidget != null
+              ? getXTitlesWidget(val, meta)
               : Text(
                   formatLabel(xAxisLabelInfo.labelFormatter, val),
                   style: xAxisLabelInfo.labelTextStyle,
@@ -554,8 +554,8 @@ FlTitlesData getTitlesData(
           reservedSize: xAxisLabelInfo.reservedSize ?? 22,
         ),
       ),
-      rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-      topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       leftTitles: AxisTitles(
         axisNameWidget: yAxisLabelInfo.title.isEmpty
             ? null

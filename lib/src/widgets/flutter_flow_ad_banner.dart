@@ -135,8 +135,8 @@ class _FlutterFlowAdBannerState extends State<FlutterFlowAdBanner> {
           print('\$BannerAd failedToLoad: \$error');
           ad.dispose();
         },
-        onAdOpened: (Ad ad) => print('\$BannerAd onAdOpened.'),
-        onAdClosed: (Ad ad) => print('\$BannerAd onAdClosed.'),
+        onAdOpened: (ad) => print('\$BannerAd onAdOpened.'),
+        onAdClosed: (ad) => print('\$BannerAd onAdClosed.'),
       ),
     );
     await banner.load();

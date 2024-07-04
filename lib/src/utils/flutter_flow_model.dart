@@ -44,7 +44,9 @@ abstract class FlutterFlowModel<W extends Widget> {
       initState(context);
       _isInitialized = true;
     }
-    if (context.widget is W) _widget = context.widget as W;
+    if (context.widget is W) {
+      _widget = context.widget as W;
+    }
   }
 
   // The widget associated with this model. This is useful for accessing the
@@ -151,13 +153,13 @@ class FlutterFlowDynamicModels<T extends FlutterFlowModel> {
 
 T? _getDefaultValue<T>() {
   switch (T) {
-    case int:
+    case const (int):
       return 0 as T;
-    case double:
+    case const (double):
       return 0.0 as T;
-    case String:
+    case const (String):
       return '' as T;
-    case bool:
+    case const (bool):
       return false as T;
     default:
       return null as T;

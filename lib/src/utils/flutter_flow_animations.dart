@@ -70,15 +70,12 @@ extension AnimatedWidgetExtension on Widget {
 
 class TiltEffect extends Effect<Offset> {
   const TiltEffect({
-    Duration? delay,
-    Duration? duration,
-    Curve? curve,
+    super.delay,
+    super.duration,
+    super.curve,
     Offset? begin,
     Offset? end,
   }) : super(
-          delay: delay,
-          duration: duration,
-          curve: curve,
           begin: begin ?? const Offset(0.0, 0.0),
           end: end ?? const Offset(0.0, 0.0),
         );

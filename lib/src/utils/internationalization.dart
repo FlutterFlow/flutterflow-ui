@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 //Helper class for internationalization
 class FFLocalizations {
@@ -9,7 +9,7 @@ class FFLocalizations {
 
   //Initializing
   static FFLocalizations of(BuildContext context) =>
-      FFLocalizations(Locale('en'));
+      FFLocalizations(const Locale('en'));
 
   static List<String> languages() => ['en'];
 
