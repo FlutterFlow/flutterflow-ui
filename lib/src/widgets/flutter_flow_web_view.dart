@@ -80,17 +80,29 @@ class _FlutterFlowWebViewState extends State<FlutterFlowWebView> {
           }
         },
         navigationDelegate: (request) async {
+          final url = request.content.source;
+          final uri = Uri.tryParse(url);
+          if (uri == null) {
+            return NavigationDecision.navigate;
+          }
           if (isAndroid) {
-            if (request.content.source
-                .startsWith('https://api.whatsapp.com/send?phone')) {
-              String url = request.content.source;
-
+            if (url.startsWith('https://api.whatsapp.com/send?phone')) {
               await launchUrl(
-                Uri.parse(url),
+                uri,
                 mode: LaunchMode.externalApplication,
               );
               return NavigationDecision.prevent;
             }
+          }
+          if (uri.scheme == 'http' || uri.scheme == 'https') {
+            return NavigationDecision.navigate;
+          }
+          if (await canLaunchUrl(uri)) {
+            await launchUrl(
+              uri,
+              mode: LaunchMode.externalApplication,
+            );
+            return NavigationDecision.prevent;
           }
           return NavigationDecision.navigate;
         },
